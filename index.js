@@ -1,11 +1,23 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const proxy = require('http-proxy-middleware');
 // Run the app by serving the static files
 // in the dist directory
 const folder = '/dist/weathery';
 
+const openweatherapi = proxy({
+  target: 'https://api.openweathermap.org',
+  changeOrigin: true,
+  router: req => {
+    const proxyTo = `https://api.openweathermap.org${req.url}&appid=${process.env.OWA_KEY}`;
+    console.log(proxyTo);
+    return proxyTo;
+  }
+});
+
 app.use(express.static(__dirname + folder));
+app.use('/data', openweatherapi);
 
 app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname + folder + '/index.html'));
