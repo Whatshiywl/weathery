@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,14 @@ export class HttpService {
   constructor(
     private http: HttpClient
   ) {
-    this.location = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
-    this.getWeatherUrl = this.mountUrl('data/2.5/weather?q=London');
+    this.location = `${window.location.protocol}//${window.location.hostname}:${environment.production ? window.location.port : '9400'}`;
+    this.getWeatherUrl = this.mountUrl('weather');
   }
 
-  getWeather() {
-    return this.http.get(this.getWeatherUrl).pipe(catchError(this.handleError));
+  getWeatherByCityName(name: string) {
+    let params = new HttpParams();
+    params = params.set('q', name);
+    return this.http.get(this.getWeatherUrl, { params }).pipe(catchError(this.handleError));
   }
 
   private handleError<T>(error: any, caught: Observable<T>) {
@@ -29,7 +32,10 @@ export class HttpService {
   }
 
   private mountUrl(endpoint: string) {
-    return `${this.location}/${endpoint}`;
+    if (endpoint.startsWith('/')) {
+      endpoint = endpoint.substr(1);
+    }
+    return `${this.location}/api/${endpoint}`;
   }
 
 }

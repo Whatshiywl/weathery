@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.httpService.getWeather().subscribe(console.log, console.error);
+    this.httpService.getWeatherByCityName('Rio').subscribe(console.log, console.error);
   }
 
 }
