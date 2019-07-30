@@ -7,9 +7,11 @@
     {{ weather?.name }}
   </h2>
   <div style="display: flex; justify-content: space-evenly">
-    <h1>
-      {{ weather?.main.temp }}
-    </h1>
+    <div>
+      <h1>
+        {{ weather?.main.temp | convertTemp: 'c' }}
+      </h1>
+    </div>
     <div *ngIf="weatherIcon">
       <img id="weather-icon" [src]="weatherIcon.src" alt="weatherIcon.alt">
       <h4 for="weather-icon">{{ weatherIcon.alt }}</h4>
