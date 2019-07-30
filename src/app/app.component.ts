@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
     src: string;
     alt: string;
   };
+  isCelcius = true;
 
   constructor(
     private httpService: HttpService
@@ -37,6 +38,14 @@ export class AppComponent implements OnInit {
     } else {
       alert('Geolocation not supported!');
     }
+  }
+
+  onTempUnitToggle() {
+    this.isCelcius = !this.isCelcius;
+  }
+
+  getTempUnit(): 'C' | 'F' {
+    return this.isCelcius ? 'C' : 'F';
   }
 
 }
