@@ -23,7 +23,24 @@ export class HttpService {
   getWeatherByCityName(name: string) {
     let params = new HttpParams();
     params = params.set('q', name);
-    return this.http.get(this.getWeatherUrl, { params }).pipe(catchError(this.handleError));
+    return this.get(this.getWeatherUrl, params);
+  }
+
+  getWeatherByCityID(id: number) {
+    let params = new HttpParams();
+    params = params.set('id', id.toString());
+    return this.get(this.getWeatherUrl, params);
+  }
+
+  getWeatherByGeoCoord(lat: number, lon: number) {
+    let params = new HttpParams();
+    params = params.set('lat', lat.toString());
+    params = params.set('lon', lon.toString());
+    return this.get(this.getWeatherUrl, params);
+  }
+
+  private get(url: string, params: HttpParams) {
+    return this.http.get(url, { params }).pipe(catchError(this.handleError));
   }
 
   private handleError<T>(error: any, caught: Observable<T>) {
