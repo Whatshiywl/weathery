@@ -1,0 +1,29 @@
+$width: 200px;
+$height: $width/2;
+$background: #368ed6;
+
+.daily-weather {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    width: $width;
+    height: $height;
+
+    >.item {
+        background-color: $background;
+
+        &.temp-display {
+            align-self: center;
+            font-size: $height;
+            padding-left: $width*0.1;
+        }
+
+        >.weather-img {
+            width: $width*0.5;
+        }
+    
+        >.weather-desc {
+            margin-top: -$height*0.1;
+        }
+    }
+}

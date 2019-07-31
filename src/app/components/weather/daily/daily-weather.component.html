@@ -1,0 +1,13 @@
+
+<div class="daily-weather">
+    <div *ngIf="weather" class="item temp-display">
+        {{ weather?.main.temp | convertTemp: tempUnit }}
+    </div>
+    <div *ngIf="!weather" class="item temp-display">
+        Loading...
+    </div>
+    <div class="item" *ngIf="weatherIcon">
+        <img class="weather-img" id="weather-icon" [src]="weatherIcon.src" alt="weatherIcon.alt">
+        <p class="weather-desc" for="weather-icon">{{ weatherIcon.alt }}</p>
+    </div>
+</div>

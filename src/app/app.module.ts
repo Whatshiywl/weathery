@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
 import { ConvertTempPipe } from './pipes/convert-temp.pipe';
 import { SwitchComponent } from './components/switch/switch.component';
+import { CurrentWeatherComponent } from './components/weather/current/current-weather.component';
+import { DailyWeatherComponent } from './components/weather/daily/daily-weather.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConvertTempPipe,
-    SwitchComponent
+    SwitchComponent,
+    CurrentWeatherComponent,
+    DailyWeatherComponent
   ],
   imports: [
     BrowserModule,

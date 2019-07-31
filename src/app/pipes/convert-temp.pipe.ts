@@ -13,7 +13,7 @@ export class ConvertTempPipe implements PipeTransform {
     if (format === 'F') {
       temp = this.convertCelciusToFahrenheit(temp);
     }
-    const unit = `${isCelciusOrFahrenheit ? '°' : ' '}${format}`;
+    const unit = `${isCelciusOrFahrenheit ? '°' : ''}`;
     return `${Math.round(temp)}${unit}`;
   }
 
