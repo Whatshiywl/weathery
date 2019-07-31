@@ -5,11 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
 import { ConvertTempPipe } from './pipes/convert-temp.pipe';
+import { SwitchComponent } from './components/switch/switch.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConvertTempPipe
+    ConvertTempPipe,
+    SwitchComponent
   ],
   imports: [
     BrowserModule,

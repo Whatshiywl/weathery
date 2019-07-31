@@ -9,16 +9,9 @@
   <div style="display: flex; justify-content: space-evenly">
     <div>
       <h1>
-        {{ weather?.main.temp | convertTemp: getTempUnit() }}
+        {{ weather?.main.temp | convertTemp: tempUnit }}
       </h1>
-      <div class="temp-unit-switch">
-        <span>C</span>
-        <label class="switch">
-          <input type="checkbox" (change)="onTempUnitToggle()">
-          <span class="slider round"></span>
-        </label>
-        <span>F</span>
-      </div>
+      <weathery-switch [options]="options" (switch)=onTempUnitToggle($event)></weathery-switch>
     </div>
     <div *ngIf="weatherIcon">
       <img id="weather-icon" [src]="weatherIcon.src" alt="weatherIcon.alt">

@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
     src: string;
     alt: string;
   };
-  isCelcius = true;
+  options = ['F', 'C'];
+  tempUnit: 'C' | 'F';
 
   constructor(
     private httpService: HttpService
@@ -40,12 +41,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onTempUnitToggle() {
-    this.isCelcius = !this.isCelcius;
-  }
-
-  getTempUnit(): 'C' | 'F' {
-    return this.isCelcius ? 'C' : 'F';
+  onTempUnitToggle(switchEvent: 'C' | 'F') {
+    this.tempUnit = switchEvent;
   }
 
 }
