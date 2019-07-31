@@ -6,5 +6,5 @@
     Location{{ weather?.name }}
   </h2>
   <weathery-switch class="item" [options]="options" (switch)=onTempUnitToggle($event)></weathery-switch>
-  <weathery-daily-weather [tempUnit]="tempUnit"></weathery-daily-weather>
+  <weathery-daily-weather class="item" [tempUnit]="tempUnit"></weathery-daily-weather>
 </div>
