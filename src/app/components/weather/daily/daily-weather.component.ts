@@ -14,12 +14,19 @@ export class DailyWeatherComponent implements OnInit {
     src: string;
     alt: string;
   };
+  precIcons = 5;
+  maxPrec = 10;
+  precArray: number[];
 
   constructor(
     private httpService: HttpService
   ) { }
 
   ngOnInit() {
+    this.precArray = [];
+    for (let rain = 0; rain < this.precIcons; rain++) {
+      this.precArray.push(this.maxPrec * rain / this.precIcons);
+    }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         console.log(position);
@@ -30,7 +37,7 @@ export class DailyWeatherComponent implements OnInit {
           if (weather.weather.length) {
             this.weatherIcon = {
               src: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
-              alt: weather.weather[0].description
+              alt: weather.weather[0].main
             };
           }
         }, () => alert('Error getting weather'));
@@ -38,6 +45,17 @@ export class DailyWeatherComponent implements OnInit {
     } else {
       alert('Geolocation not supported!');
     }
+  }
+
+  getPrecClass(prec: number) {
+    const isRaining = this.weather && this.weather.rain;
+    const isSnowing = this.weather && this.weather.snow;
+    const currentPrec = isSnowing ? this.weather.snow["3h"] : (isRaining ? this.weather.rain["3h"] : 0);
+    return {
+      "wi-raindrop": !isSnowing,
+      "wi-snowflake-cold": isSnowing,
+      empty: prec >= currentPrec
+    };
   }
 
 }

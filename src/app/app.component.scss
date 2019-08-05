@@ -9,19 +9,19 @@
         justify-self: center;
 
         &.title {
-            grid-row-start: 1;
+            // grid-row-start: 1;
         }
 
         &.location {
-            grid-row-start: 2;
+            // grid-row-start: 2;
         }
+    }
 
-        &weather-switch {
-            grid-row-start: 3;
-        }
-
-        &weathery-daily-weather {
-            grid-row-start: 4;
-        }
+    >weather-switch {
+        display: block;
+    }
+    
+    >weathery-daily-weather {
+        width: 100%;
     }
 }

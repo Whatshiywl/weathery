@@ -1,13 +1,18 @@
-
 <div class="daily-weather">
-    <div *ngIf="weather" class="item temp-display">
-        {{ weather?.main.temp | convertTemp: tempUnit }}
+    <h2 class="when-display">Today</h2>
+    <div *ngIf="weather" class="temp-display">
+        <span>
+            {{ weather?.main.temp | convertTemp: tempUnit }}
+        </span>
     </div>
-    <div *ngIf="!weather" class="item temp-display">
+    <div *ngIf="!weather" class="temp-display">
         Loading...
     </div>
-    <div class="item" *ngIf="weatherIcon">
-        <img class="weather-img" id="weather-icon" [src]="weatherIcon.src" alt="weatherIcon.alt">
-        <p class="weather-desc" for="weather-icon">{{ weatherIcon.alt }}</p>
+    <div class="weather-display">
+        <img class="weather-img" id="weather-icon" [src]="weatherIcon?.src" alt="weatherIcon.alt">
+        <span class="weather-desc" for="weather-icon">{{ weatherIcon?.alt }}</span>
+        <div class="rain-display">
+            <i *ngFor="let prec of precArray" class="wi" [ngClass]="getPrecClass(prec)"></i>
+        </div>
     </div>
 </div>
