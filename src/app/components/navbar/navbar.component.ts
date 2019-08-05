@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'weathery-navbar',
@@ -8,9 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarComponent implements OnInit {
   @Input() title: string;
   @Input() location: string;
+  @Output() switch: EventEmitter<'C' | 'F'> = new EventEmitter<'C' | 'F'>();
 
   options = ['F', 'C'];
-  tempUnit: 'C' | 'F';
 
   constructor() { }
 
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onTempUnitToggle(switchEvent: 'C' | 'F') {
-    this.tempUnit = switchEvent;
+    this.switch.emit(switchEvent);
   }
 
 }
