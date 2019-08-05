@@ -3,8 +3,8 @@
     Welcome to {{ title }}!
   </h1>
   <h2 class="item location">
-    Location{{ weather?.name }}
+    {{ currentWeather?.name }}
   </h2>
   <weathery-switch class="item" [options]="options" (switch)=onTempUnitToggle($event)></weathery-switch>
-  <weathery-daily-weather class="item" [tempUnit]="tempUnit"></weathery-daily-weather>
+  <weathery-daily-weather class="item" [weather]="currentWeather" [tempUnit]="tempUnit"></weathery-daily-weather>
 </div>

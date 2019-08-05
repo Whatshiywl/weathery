@@ -3,12 +3,12 @@
     <h2  *ngIf="weather" class="when-display">Today</h2>
     <div *ngIf="weather" class="temp-display">
         <span>
-            {{ weather?.main.temp | convertTemp: tempUnit }}
+            {{ weather.main.temp | convertTemp: tempUnit }}
         </span>
     </div>
     <div *ngIf="weather" class="weather-display">
-        <img class="weather-img" id="weather-icon" [src]="weatherIcon?.src" alt="weatherIcon.alt">
-        <span class="weather-desc" for="weather-icon">{{ weatherIcon?.alt }}</span>
+        <img class="weather-img" id="weather-icon" [src]="weatherIcon.src" alt="weatherIcon.alt">
+        <span class="weather-desc" for="weather-icon">{{ weatherIcon.alt }}</span>
         <div class="rain-display">
             <i *ngFor="let prec of precArray" class="wi" [ngClass]="getPrecClass(prec)"></i>
         </div>

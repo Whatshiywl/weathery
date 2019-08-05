@@ -5,7 +5,6 @@ $height: 175px;
 
 .daily-weather {
     position: relative;
-    left: -50px;
     width: $width;
     height: $height;
     background-color: $background;
@@ -36,7 +35,6 @@ $height: 175px;
         flex-direction: column;
         top: 10%;
         right: 10%;
-        // border: 1px solid red;
 
         >.weather-img {
             width: 100px;

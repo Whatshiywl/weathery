@@ -11,9 +11,24 @@ export class AppComponent implements OnInit {
   options = ['F', 'C'];
   tempUnit: 'C' | 'F';
 
-  constructor() { }
+  currentWeather: Weather;
+
+  constructor(
+    private httpService: HttpService
+  ) { }
 
   ngOnInit() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+        const coords = position.coords;
+        this.httpService.getWeatherByGeoCoord(coords.latitude, coords.longitude).subscribe(weather => {
+          this.currentWeather = weather;
+        }, () => alert('Error getting weather'));
+      });
+    } else {
+      alert('Geolocation not supported!');
+    }
   }
 
   onTempUnitToggle(switchEvent: 'C' | 'F') {

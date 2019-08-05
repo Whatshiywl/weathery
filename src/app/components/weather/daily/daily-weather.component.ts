@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { HttpService, Weather } from 'src/app/services/http.service';
 
 @Component({
@@ -6,10 +6,10 @@ import { HttpService, Weather } from 'src/app/services/http.service';
   templateUrl: './daily-weather.component.html',
   styleUrls: ['./daily-weather.component.scss']
 })
-export class DailyWeatherComponent implements OnInit {
+export class DailyWeatherComponent implements OnInit, OnChanges {
+  @Input() weather: Weather;
   @Input() tempUnit: 'C' | 'F';
   
-  weather: Weather;
   weatherIcon: {
     src: string;
     alt: string;
@@ -18,32 +18,24 @@ export class DailyWeatherComponent implements OnInit {
   maxPrec = 10;
   precArray: number[];
 
-  constructor(
-    private httpService: HttpService
-  ) { }
+  constructor( ) { }
 
   ngOnInit() {
     this.precArray = [];
     for (let rain = 0; rain < this.precIcons; rain++) {
       this.precArray.push(this.maxPrec * rain / this.precIcons);
     }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
-        const coords = position.coords;
-        this.httpService.getWeatherByGeoCoord(coords.latitude, coords.longitude).subscribe(weather => {
-          console.log(weather);
-          this.weather = weather;
-          if (weather.weather.length) {
-            this.weatherIcon = {
-              src: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
-              alt: weather.weather[0].main
-            };
-          }
-        }, () => alert('Error getting weather'));
-      });
-    } else {
-      alert('Geolocation not supported!');
+  }
+
+  ngOnChanges(evt: SimpleChanges) {
+    console.log(evt);
+    if (evt.weather) {
+      if (this.weather && this.weather.weather.length) {
+        this.weatherIcon = {
+          src: `http://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`,
+          alt: this.weather.weather[0].main
+        };
+      }
     }
   }
 
