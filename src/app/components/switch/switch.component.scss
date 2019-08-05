@@ -1,7 +1,9 @@
+@import 'src/assets/global.scss';
+
 $height: 36px;
 $width: $height*1.76;
-$background: #ccc;
-$slider-color: white;
+$background: $neutral-color;
+$slider-color:darken($temp-color, 15%);
 $font-color: black;
 
 /* The switch - the box around the slider */

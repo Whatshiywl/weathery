@@ -1,10 +1,4 @@
-<div class="main-grid" style="text-align:center">
-  <h1 class="item title">
-    Welcome to {{ title }}!
-  </h1>
-  <h2 class="item location">
-    {{ currentWeather?.name }}
-  </h2>
-  <weathery-switch class="item" [options]="options" (switch)=onTempUnitToggle($event)></weathery-switch>
-  <weathery-daily-weather class="item" [weather]="currentWeather" [tempUnit]="tempUnit"></weathery-daily-weather>
+<div class="main-grid">
+  <weathery-navbar [title]="title" [location]="currentWeather?.name"></weathery-navbar>
+  <weathery-daily-weather [weather]="currentWeather" [tempUnit]="tempUnit"></weathery-daily-weather>
 </div>

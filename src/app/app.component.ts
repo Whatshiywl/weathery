@@ -7,9 +7,7 @@ import { HttpService, Weather } from './services/http.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'weathery';
-  options = ['F', 'C'];
-  tempUnit: 'C' | 'F';
+  title = 'Weathery';
 
   currentWeather: Weather;
 
@@ -29,10 +27,6 @@ export class AppComponent implements OnInit {
     } else {
       alert('Geolocation not supported!');
     }
-  }
-
-  onTempUnitToggle(switchEvent: 'C' | 'F') {
-    this.tempUnit = switchEvent;
   }
 
 }

@@ -1,11 +1,19 @@
 .main-grid {
     display: grid;
     grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 4em 1em auto auto auto;
     justify-items: center;
-    grid-gap: 10px;
+    grid-gap: 0;
 
-    >.item {
-        grid-column-start: 2;
+    >weathery-navbar {
+        grid-column: 1 / end;
+        justify-self: stretch;
+        align-self: stretch;
+    }
+
+    >weathery-daily-weather {
+        grid-column: 2;
+        grid-row: 3;
         justify-self: center;
     }
 }

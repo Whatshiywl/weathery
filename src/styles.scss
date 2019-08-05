@@ -1,3 +1,7 @@
+@import 'src/assets/global.scss';
+
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: $temp-color;
+    margin: 0;
 }

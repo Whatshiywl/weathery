@@ -8,6 +8,7 @@ import { ConvertTempPipe } from './pipes/convert-temp.pipe';
 import { SwitchComponent } from './components/switch/switch.component';
 import { CurrentWeatherComponent } from './components/weather/current/current-weather.component';
 import { DailyWeatherComponent } from './components/weather/daily/daily-weather.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DailyWeatherComponent } from './components/weather/daily/daily-weather.
     ConvertTempPipe,
     SwitchComponent,
     CurrentWeatherComponent,
-    DailyWeatherComponent
+    DailyWeatherComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 @import 'src/assets/global.scss';
 
-$background: hsl(207, 66%, 53%);
 $width: 350px;
 $height: 175px;
 
@@ -8,7 +7,8 @@ $height: 175px;
     position: relative;
     width: $width;
     height: $height;
-    background-color: $background;
+    background-color: $neutral-color;
+    text-align: center;
 
     >.na-display {
         width: $width;
