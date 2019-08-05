@@ -61,11 +61,11 @@ $font-color: black;
 
         /* Rounded sliders */
         &.round-corners {
-            border-radius: $height*0.1;
+            border-radius: $height*0.5;
         }
 
         &.round-corners:before {
-            border-radius: $height*0.05;
+            border-radius: $height*0.5;
         }
     }
 }
