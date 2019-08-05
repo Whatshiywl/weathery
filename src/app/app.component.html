@@ -1,4 +1,4 @@
 <div class="main-grid">
-  <weathery-navbar [title]="title" [location]="currentWeather?.name" (switch)=onTempUnitToggle($event)></weathery-navbar>
+  <weathery-navbar [title]="title" [location]="currentWeather?.name || geolocationError" (switch)=onTempUnitToggle($event)></weathery-navbar>
   <weathery-daily-weather [weather]="currentWeather" [tempUnit]="tempUnit"></weathery-daily-weather>
 </div>

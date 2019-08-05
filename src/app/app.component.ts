@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
   currentWeather: Weather;
   tempUnit: 'C' | 'F';
 
+  geolocationError: string;
+
   constructor(
     private httpService: HttpService
   ) { }
@@ -22,8 +24,24 @@ export class AppComponent implements OnInit {
         console.log(position);
         const coords = position.coords;
         this.httpService.getWeatherByGeoCoord(coords.latitude, coords.longitude).subscribe(weather => {
+          this.geolocationError = undefined;
           this.currentWeather = weather;
         }, () => alert('Error getting weather'));
+      }, err => {
+        this.currentWeather = undefined;
+        switch (err.code) {
+          case 1:
+            this.geolocationError = 'Location denied';
+            break;
+          case 2:
+            this.geolocationError = 'Location unavailable';
+            break;
+          case 3:
+            this.geolocationError = 'Location timed out';
+            break;
+        }
+      }, {
+        enableHighAccuracy: true
       });
     } else {
       alert('Geolocation not supported!');
