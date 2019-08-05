@@ -2,6 +2,7 @@
 
 $width: 350px;
 $height: 175px;
+$wether-display-width: 100px;
 
 .daily-weather {
     position: relative;
@@ -13,43 +14,48 @@ $height: 175px;
     >.na-display {
         width: $width;
         line-height: $height;
-        font-size: 12em;
+        font-size: 10em;
         margin: 0;
     }
 
     >.when-display {
         position: absolute;
-        top: 0;
+        top: -10px;
         width: 100%;
     }
 
     >.temp-display {
         position: absolute;
-        font-size: 12em;
+        font-size: 7em;
         line-height: $height;
-        left: 5%;
+        left: 8%;
     }
 
     >.weather-display {
         position: absolute;
         display: flex;
         flex-direction: column;
-        top: 10%;
+        top: 6%;
         right: 10%;
+        width: $wether-display-width;
 
         >.weather-img {
-            width: 100px;
+            width: 100%;
         }
 
         >.weather-desc {
+            width: 100%;
+            margin-top: -20px;
             text-align: center;
+            font-size: 1.2em;
+            overflow-wrap: break-word;
         }
 
         >.rain-display {
             display: flex;
             justify-content: space-around;
             width: 100%;
-            margin-top: 30px;
+            margin-top: 10px;
             
             >.wi-raindrop {
                 color: black;
@@ -70,7 +76,6 @@ $height: 175px;
 @media screen and (min-width: $break-small) {
     $width: 500px;
     $height: 300px;
-    $wether-display-width: 100px;
 
     .daily-weather {
         width: $width;
@@ -80,40 +85,28 @@ $height: 175px;
             width: $width;
             line-height: $height;
             font-size: 12em;
-            margin: 0;
         }
 
         >.when-display {
-            position: absolute;
             top: 0;
-            width: 100%;
         }
     
         >.temp-display {
-            position: absolute;
             font-size: 12em;
             line-height: $height;
             left: 5%;
         }
     
         >.weather-display {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
             top: 20%;
-            right: 10%;
-            width: $wether-display-width;
-            // border: 1px solid red;
-    
-            >.weather-img {
-                width: 100%;
-            }
     
             >.weather-desc {
-                width: 100%;
-                text-align: center;
+                margin-top: -5px;
                 font-size: 1.5em;
-                overflow-wrap: break-word;
+            }
+
+            >.rain-display {
+                margin-top: 30px;
             }
         }
     }

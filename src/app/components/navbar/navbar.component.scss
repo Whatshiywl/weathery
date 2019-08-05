@@ -9,6 +9,17 @@
     height: 100%;
 
     >.title {
+        font-size: 1.5em;
+    }
+
+    >.location {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (min-width: $break-small) {
+
+    >.title {
         font-size: 2em;
     }
 
