@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SwitchComponent {
   @Input() options: string[] = ['Y', 'N'];
+  @Input() index: number;
   @Output() switch: EventEmitter<string> = new EventEmitter<string>();
 
   private selected = false;

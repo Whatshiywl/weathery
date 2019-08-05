@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService, Weather } from './services/http.service';
+import { HttpService, Weather } from './services/http/http.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   tempUnit: 'C' | 'F';
 
   geolocationError: string;
+  comfortIndex: number;
 
   constructor(
     private httpService: HttpService
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
         this.httpService.getWeatherByGeoCoord(coords.latitude, coords.longitude).subscribe(weather => {
           this.geolocationError = undefined;
           this.currentWeather = weather;
+          this.comfortIndex = this.getTempScale(weather.main.temp);
         }, () => alert('Error getting weather'));
       }, err => {
         this.currentWeather = undefined;
@@ -50,6 +52,14 @@ export class AppComponent implements OnInit {
   
   onTempUnitToggle(switchEvent: 'C' | 'F') {
     this.tempUnit = switchEvent;
+  }
+
+  getTempScale(temp) {
+    const mid = 273 + 20;
+    const T = temp - mid;
+    const p1 = 20;
+    const p2 = 20;
+    return Math.round(100 / (Math.exp(-(T / p1 + Math.exp(T / p2) - 1)) + 1));
   }
 
 }

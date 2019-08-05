@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { HttpService, Weather } from 'src/app/services/http.service';
+import { Weather } from 'src/app/services/http/http.service';
 
 @Component({
   selector: 'weathery-daily-weather',

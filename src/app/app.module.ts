@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HttpService } from './services/http.service';
+import { HttpService } from './services/http/http.service';
 import { ConvertTempPipe } from './pipes/convert-temp.pipe';
 import { SwitchComponent } from './components/switch/switch.component';
 import { CurrentWeatherComponent } from './components/weather/current/current-weather.component';

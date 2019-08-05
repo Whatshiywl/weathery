@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class NavbarComponent implements OnInit {
   @Input() title: string;
   @Input() location: string;
+  @Input() index: number;
   @Output() switch: EventEmitter<'C' | 'F'> = new EventEmitter<'C' | 'F'>();
 
   options = ['F', 'C'];

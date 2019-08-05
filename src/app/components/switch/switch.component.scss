@@ -3,7 +3,6 @@
 $height: 36px;
 $width: $height*1.76;
 $background: $neutral-color;
-$slider-color:darken($temp-color, 15%);
 $font-color: black;
 
 /* The switch - the box around the slider */
@@ -19,11 +18,16 @@ $font-color: black;
       width: 0;
       height: 0;
 
-      &:checked + .slider:before {
+      &:checked + .slider>.before {
           -webkit-transform: translateX($height*0.76);
           -ms-transform: translateX($height*0.76);
           transform: translateX($height*0.76);
       }
+    }
+
+    /* Rounded sliders */
+    .round-corners {
+        border-radius: $height*0.5;
     }
 
     /* The slider */
@@ -49,25 +53,15 @@ $font-color: black;
             }
         }
 
-        &:before {
+        >.before {
             position: absolute;
             content: "";
             height: $height*0.76;
             width: $height*0.76;
             left: $height*0.12;
             bottom: $height*0.12;
-            background-color: $slider-color;
             -webkit-transition: .4s;
             transition: .4s;
-        }
-
-        /* Rounded sliders */
-        &.round-corners {
-            border-radius: $height*0.5;
-        }
-
-        &.round-corners:before {
-            border-radius: $height*0.5;
         }
     }
 }

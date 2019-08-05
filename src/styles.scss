@@ -2,6 +2,25 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: $temp-color;
     margin: 0;
+}
+
+@for $i from 0 through 100 {
+    $percent: percentage($i/100);
+    $base: temp-gradient($percent);
+
+    .temp-color-#{$i} {
+        background-color: $base;
+        color: $base;
+    }
+
+    .temp-color-#{$i}-dark {
+        background-color: darken($base, 10%);
+        color: $base;
+    }
+
+    .temp-color-#{$i}-light {
+        background-color: lighten($base, 10%);
+        color: $base;
+    }
 }

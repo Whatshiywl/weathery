@@ -1,19 +1,24 @@
-.main-grid {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 4em 1em auto auto auto;
-    justify-items: center;
-    grid-gap: 0;
+.main-wrapper {
+    width: 100vw;
+    height: 100vh;
 
-    >weathery-navbar {
-        grid-column: 1 / end;
-        justify-self: stretch;
-        align-self: stretch;
-    }
-
-    >weathery-daily-weather {
-        grid-column: 2;
-        grid-row: 3;
-        justify-self: center;
-    }
+    >.main-grid {
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
+        grid-template-rows: 4em 1em auto auto auto;
+        justify-items: center;
+        grid-gap: 0;
+    
+        >weathery-navbar {
+            grid-column: 1 / end;
+            justify-self: stretch;
+            align-self: stretch;
+        }
+    
+        >weathery-daily-weather {
+            grid-column: 2;
+            grid-row: 3;
+            justify-self: center;
+        }
+    }    
 }
