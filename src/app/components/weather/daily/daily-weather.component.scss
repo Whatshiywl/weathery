@@ -10,6 +10,13 @@ $height: 175px;
     height: $height;
     background-color: $background;
 
+    >.na-display {
+        width: $width;
+        line-height: $height;
+        font-size: 12em;
+        margin: 0;
+    }
+
     >.when-display {
         position: absolute;
         top: 0;
@@ -64,17 +71,24 @@ $height: 175px;
 @media screen and (min-width: $break-small) {
     $width: 500px;
     $height: 300px;
-
-    >.when-display {
-        position: absolute;
-        top: 0;
-        left: 25%;
-    }
+    $wether-display-width: 100px;
 
     .daily-weather {
         width: $width;
         height: $height;
-        $wether-display-width: 100px;
+
+        >.na-display {
+            width: $width;
+            line-height: $height;
+            font-size: 12em;
+            margin: 0;
+        }
+
+        >.when-display {
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
     
         >.temp-display {
             position: absolute;

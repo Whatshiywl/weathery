@@ -1,14 +1,12 @@
 <div class="daily-weather">
-    <h2 class="when-display">Today</h2>
+    <span *ngIf="!weather" class="na-display">N/A</span>
+    <h2  *ngIf="weather" class="when-display">Today</h2>
     <div *ngIf="weather" class="temp-display">
         <span>
             {{ weather?.main.temp | convertTemp: tempUnit }}
         </span>
     </div>
-    <div *ngIf="!weather" class="temp-display">
-        Loading...
-    </div>
-    <div class="weather-display">
+    <div *ngIf="weather" class="weather-display">
         <img class="weather-img" id="weather-icon" [src]="weatherIcon?.src" alt="weatherIcon.alt">
         <span class="weather-desc" for="weather-icon">{{ weatherIcon?.alt }}</span>
         <div class="rain-display">
