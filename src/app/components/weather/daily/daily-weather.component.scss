@@ -1,5 +1,6 @@
-$background: #368ed6;
-$break-small: 320px;
+@import 'src/assets/global.scss';
+
+$background: hsl(207, 66%, 53%);
 $width: 350px;
 $height: 175px;
 
