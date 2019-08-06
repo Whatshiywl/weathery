@@ -1,5 +1,5 @@
-<div [class]="'navbar-wrapper temp-color-' + index + '-dark'">
+<div [class]="'navbar-wrapper ' + tempClass">
     <span class="title">{{ title }}</span>
     <span class="location">{{ location }}</span>
-    <weathery-switch [options]="options" [index]="index" (switch)=onTempUnitToggle($event)></weathery-switch>
+    <weathery-switch [options]="options" (switch)=onTempUnitToggle($event)></weathery-switch>
 </div>

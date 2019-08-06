@@ -1,6 +1,6 @@
-<div [class]="'main-wrapper temp-color-' + comfortIndex">
+<div [class]="'main-wrapper ' + tempClass">
   <div class="main-grid">
-    <weathery-navbar [title]="title" [location]="currentWeather?.name || geolocationError" [index]="comfortIndex" (switch)=onTempUnitToggle($event)></weathery-navbar>
-    <weathery-daily-weather [weather]="currentWeather" [tempUnit]="tempUnit"></weathery-daily-weather>
+    <weathery-navbar [title]="title"></weathery-navbar>
+    <weathery-daily-weather></weathery-daily-weather>
   </div>
 </div>

@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { WeatherService } from 'src/app/services/weather/weather.service';
+import { TempUnit } from 'src/app/services/weather/WeatherContainer';
 
 @Component({
   selector: 'weathery-navbar',
@@ -7,19 +9,38 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   @Input() title: string;
-  @Input() location: string;
-  @Input() index: number;
-  @Output() switch: EventEmitter<'C' | 'F'> = new EventEmitter<'C' | 'F'>();
-
+  
+  location: string;
+  locationError: string;
+  tempClass: string;
   options = ['F', 'C'];
 
-  constructor() { }
+  constructor(
+    private weatherService: WeatherService
+  ) { }
 
   ngOnInit() {
+    this.weatherService.onWeather$()
+    .subscribe(container => {
+      this.location = container.getLocation();
+      this.tempClass = container.getTempClassDark();
+    }, err => {
+      switch (err.code) {
+      case 1:
+        this.locationError = 'Location denied';
+        break;
+      case 2:
+        this.locationError = 'Location unavailable';
+        break;
+      case 3:
+        this.locationError = 'Location timed out';
+        break;
+      }
+    });
   }
 
-  onTempUnitToggle(switchEvent: 'C' | 'F') {
-    this.switch.emit(switchEvent);
+  onTempUnitToggle(unit: TempUnit) {
+    this.weatherService.setTempUnit(unit);
   }
 
 }

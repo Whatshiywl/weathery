@@ -9,6 +9,7 @@ import { SwitchComponent } from './components/switch/switch.component';
 import { CurrentWeatherComponent } from './components/weather/current/current-weather.component';
 import { DailyWeatherComponent } from './components/weather/daily/daily-weather.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { WeatherService } from './services/weather/weather.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule
   ],
   providers: [
-    HttpService
+    HttpService,
+    WeatherService
   ],
   bootstrap: [AppComponent]
 })

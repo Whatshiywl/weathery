@@ -1,14 +1,14 @@
 <div class="daily-weather">
-    <span *ngIf="!weather" class="na-display">N/A</span>
-    <h2  *ngIf="weather" class="when-display">Today</h2>
-    <div *ngIf="weather" class="temp-display">
+    <span *ngIf="!container" class="na-display">N/A</span>
+    <h2  *ngIf="container" class="when-display">Today</h2>
+    <div *ngIf="container" class="temp-display">
         <span>
-            {{ weather.main.temp | convertTemp: tempUnit }}
+            {{ getWeather().main.temp | convertTemp: getUnit() }}
         </span>
     </div>
-    <div *ngIf="weather" class="weather-display">
-        <img class="weather-img" id="weather-icon" [src]="weatherIcon.src" alt="weatherIcon.alt">
-        <span class="weather-desc" for="weather-icon">{{ weatherIcon.alt }}</span>
+    <div *ngIf="container" class="weather-display">
+        <img class="weather-img" id="weather-icon" [src]="getIcon().src" alt="getIcon().alt">
+        <span class="weather-desc" for="weather-icon">{{ getIcon().alt }}</span>
         <div class="rain-display">
             <i *ngFor="let prec of precArray" class="wi" [ngClass]="getPrecClass(prec)"></i>
         </div>

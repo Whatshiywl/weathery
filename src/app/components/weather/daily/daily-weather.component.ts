@@ -1,48 +1,52 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Weather } from 'src/app/services/http/http.service';
+import { Component, OnInit } from '@angular/core';
+import { WeatherContainer } from 'src/app/services/weather/WeatherContainer';
+import { WeatherService } from 'src/app/services/weather/weather.service';
 
 @Component({
   selector: 'weathery-daily-weather',
   templateUrl: './daily-weather.component.html',
   styleUrls: ['./daily-weather.component.scss']
 })
-export class DailyWeatherComponent implements OnInit, OnChanges {
-  @Input() weather: Weather;
-  @Input() tempUnit: 'C' | 'F';
-  
-  weatherIcon: {
-    src: string;
-    alt: string;
-  };
-  precIcons = 5;
-  maxPrec = 10;
-  precArray: number[];
+export class DailyWeatherComponent implements OnInit {
+  container: WeatherContainer;
 
-  constructor( ) { }
+  precArray: number[];
+  private precIcons = 5;
+  private maxPrec = 10;
+
+  constructor(
+    private weatherService: WeatherService
+  ) { }
 
   ngOnInit() {
     this.precArray = [];
     for (let rain = 0; rain < this.precIcons; rain++) {
       this.precArray.push(this.maxPrec * rain / this.precIcons);
     }
+
+    this.weatherService.onWeather$()
+    .subscribe(container => {
+      this.container = container;
+    });
   }
 
-  ngOnChanges(evt: SimpleChanges) {
-    console.log(evt);
-    if (evt.weather) {
-      if (this.weather && this.weather.weather.length) {
-        this.weatherIcon = {
-          src: `http://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`,
-          alt: this.weather.weather[0].main
-        };
-      }
-    }
+  getWeather() {
+    return this.container.getWeather();
+  }
+
+  getIcon() {
+    return this.container.getIcon();
+  }
+
+  getUnit() {
+    return this.container.getUnit();
   }
 
   getPrecClass(prec: number) {
-    const isRaining = this.weather && this.weather.rain;
-    const isSnowing = this.weather && this.weather.snow;
-    const currentPrec = isSnowing ? this.weather.snow["3h"] : (isRaining ? this.weather.rain["3h"] : 0);
+    const weather = this.container.getWeather();
+    const isRaining = weather && weather.rain;
+    const isSnowing = weather && weather.snow;
+    const currentPrec = isSnowing ? weather.snow["3h"] : (isRaining ? weather.rain["3h"] : 0);
     return {
       "wi-raindrop": !isSnowing,
       "wi-snowflake-cold": isSnowing,

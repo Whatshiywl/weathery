@@ -1,18 +1,29 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { WeatherService } from 'src/app/services/weather/weather.service';
 
 @Component({
   selector: 'weathery-switch',
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.scss']
 })
-export class SwitchComponent {
+export class SwitchComponent implements OnInit {
   @Input() options: string[] = ['Y', 'N'];
-  @Input() index: number;
   @Output() switch: EventEmitter<string> = new EventEmitter<string>();
+
+  tempClass: string
 
   private selected = false;
 
-  constructor() { }
+  constructor(
+    private weatherService: WeatherService
+  ) { }
+
+  ngOnInit() {
+    this.weatherService.onWeather$()
+    .subscribe(weather => {
+      this.tempClass = weather.getTempClassDark();
+    });
+  }
 
   onChange() {
     this.selected = !this.selected;

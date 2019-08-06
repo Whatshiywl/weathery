@@ -1,57 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, first } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-export interface Weather {
-  base: string;
-  clouds: {
-    all: number;
-  };
-  cod: number;
-  coord: {
-    lat: number;
-    lon: number;
-  };
-  dt: number;
-  id: number;
-  main: {
-    humidity: number;
-    pressure: number;
-    temp: number;
-    temp_max: number;
-    temp_min: number;
-  };
-  name: string;
-  sys: {
-    country: string;
-    id: number;
-    message: number;
-    sunrise: number;
-    sunset: number;
-    type: number;
-  };
-  timezone: number;
-  visibility: number;
-  weather: {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }[];
-  wind: {
-    deg: number;
-    speed: number;
-  };
-  rain: {
-    "1h": number;
-    "3h": number;
-  };
-  snow: {
-    "1h": number;
-    "3h": number;
-  };
-}
+import { Weather } from '../weather/WeatherContainer';
 
 @Injectable({
   providedIn: 'root'
@@ -81,15 +33,15 @@ export class HttpService {
     return this.get<Weather>(this.getWeatherUrl, params);
   }
 
-  getWeatherByGeoCoord(lat: number, lon: number) {
+  getWeatherByGeoCoord(coords: Coordinates) {
     let params = new HttpParams();
-    params = params.set('lat', lat.toString());
-    params = params.set('lon', lon.toString());
+    params = params.set('lat', coords.latitude.toString());
+    params = params.set('lon', coords.longitude.toString());
     return this.get<Weather>(this.getWeatherUrl, params);
   }
 
   private get<T>(url: string, params: HttpParams) {
-    return this.http.get<T>(url, { params }).pipe(catchError(this.handleError));
+    return this.http.get<T>(url, { params }).pipe(first(), catchError(this.handleError));
   }
 
   private handleError<T>(error: any, caught: Observable<T>) {
