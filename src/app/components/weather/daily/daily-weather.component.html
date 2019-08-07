@@ -1,4 +1,4 @@
-<div class="daily-weather">
+<div [class]="'daily-weather ' + tempClass">
     <span *ngIf="!container" class="na-display">N/A</span>
     <h2  *ngIf="container" class="when-display">Today</h2>
     <div *ngIf="container" class="temp-display">

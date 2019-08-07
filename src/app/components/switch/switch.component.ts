@@ -10,7 +10,8 @@ export class SwitchComponent implements OnInit {
   @Input() options: string[] = ['Y', 'N'];
   @Output() switch: EventEmitter<string> = new EventEmitter<string>();
 
-  tempClass: string
+  backColor: string;
+  sliderColor: string
 
   private selected = false;
 
@@ -21,7 +22,8 @@ export class SwitchComponent implements OnInit {
   ngOnInit() {
     this.weatherService.onWeather$()
     .subscribe(weather => {
-      this.tempClass = weather.getTempClassDark();
+      this.backColor = weather.getTempClass();
+      this.sliderColor = weather.getTempClassDark();
     });
   }
 

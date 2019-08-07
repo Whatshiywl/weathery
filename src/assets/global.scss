@@ -1,8 +1,13 @@
 $break-small: 600px;
-$cold-color: #388fd6;
-$heat-color: #d4881c;
+$cold-color: #0f83de;
+$midl-color: #eee;
+$heat-color: #e37f09;
 $neutral-color: #ccc;
 
 @function temp-gradient($index) {
-    @return mix($heat-color, $cold-color, $weight: $index);
+    @if $index < 50% {
+        @return mix($midl-color, $cold-color, $weight: 2*$index);
+    } @else {
+        @return mix($heat-color, $midl-color, $weight: 2*($index - 50%));
+    }
 }

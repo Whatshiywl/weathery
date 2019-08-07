@@ -8,9 +8,9 @@ $wether-display-width: 100px;
     position: relative;
     width: $width;
     height: $height;
-    background-color: $neutral-color;
     text-align: center;
     color: black;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.3);
 
     >.na-display {
         width: $width;
@@ -93,9 +93,9 @@ $wether-display-width: 100px;
         }
     
         >.temp-display {
-            font-size: 12em;
+            font-size: 10em;
             line-height: $height;
-            left: 5%;
+            left: 8%;
         }
     
         >.weather-display {

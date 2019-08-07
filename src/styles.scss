@@ -12,6 +12,8 @@ body {
     .temp-color-#{$i} {
         background-color: $base;
         color: $base;
+        -webkit-transition: 1s;
+        transition: 1s;
     }
 
     .temp-color-#{$i}-dark {

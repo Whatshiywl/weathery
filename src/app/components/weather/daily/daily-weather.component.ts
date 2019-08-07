@@ -9,6 +9,7 @@ import { WeatherService } from 'src/app/services/weather/weather.service';
 })
 export class DailyWeatherComponent implements OnInit {
   container: WeatherContainer;
+  tempClass: string;
 
   precArray: number[];
   private precIcons = 5;
@@ -27,6 +28,7 @@ export class DailyWeatherComponent implements OnInit {
     this.weatherService.onWeather$()
     .subscribe(container => {
       this.container = container;
+      this.tempClass = container.getTempClassLight();
     });
   }
 

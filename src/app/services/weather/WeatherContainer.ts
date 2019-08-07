@@ -120,7 +120,7 @@ export class WeatherContainer {
       const mid = 273 + 20;
       const T = this.weather.main.temp - mid;
       const p1 = 20;
-      const p2 = 20;
+      const p2 = 25;
       return Math.round(100 / (Math.exp(-(T / p1 + Math.exp(T / p2) - 1)) + 1));
     }
 }
