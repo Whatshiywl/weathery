@@ -1,1 +1,15 @@
-{{ locationError || location || loadingMsg }}
+<div class="search-bar-wrapper">
+    <div class="search-bar-item input-wrapper">
+        <input type="text" [value]="location">
+    </div>
+    <div *ngIf="false" class="search-bar-item">
+        <label (click)="onSearch($event)">
+            <i class="wi wi-time-1"></i>
+        </label>
+    </div>
+    <div *ngIf="false" class="search-bar-item">
+        <label (click)="onGeolocation($event)">
+            <i class="wi wi-moon-new"></i>
+        </label>
+    </div>
+</div>

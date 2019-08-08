@@ -8,15 +8,13 @@ import { WeatherService } from 'src/app/services/weather/weather.service';
 })
 export class SearchBarComponent implements OnInit {
 
-  locationError: string;
   location: string;
-  loadingMsg: string;
   tempClass: string;
 
   constructor(
     private weatherService: WeatherService
   ) {
-    this.loadingMsg = 'Loading...';
+    this.location = 'Loading...';
   }
 
   ngOnInit() {
@@ -29,16 +27,24 @@ export class SearchBarComponent implements OnInit {
     this.weatherService.onError$().subscribe(err => {
       switch (err.code) {
       case 1:
-        this.locationError = 'Location denied';
+        this.location = 'Location denied';
         break;
       case 2:
-        this.locationError = 'Location unavailable';
+        this.location = 'Location unavailable';
         break;
       case 3:
-        this.locationError = 'Location timed out';
+        this.location = 'Location timed out';
         break;
       }
     });
+  }
+
+  onGeolocation(evt: MouseEvent) {
+    console.log(evt);
+  }
+
+  onSearch(evt: MouseEvent) {
+    console.log(evt);
   }
 
 }
