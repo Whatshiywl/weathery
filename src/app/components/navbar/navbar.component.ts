@@ -10,32 +10,19 @@ import { TempUnit } from 'src/app/services/weather/WeatherContainer';
 export class NavbarComponent implements OnInit {
   @Input() title: string;
   
-  location: string;
-  locationError: string;
   tempClass: string;
-  options = ['F', 'C'];
+  tempUnitOptions = ['F', 'C'];
 
   constructor(
     private weatherService: WeatherService
-  ) { }
+  ) {
+    this.tempClass = 'temp-color-50-dark';
+  }
 
   ngOnInit() {
     this.weatherService.onWeather$()
     .subscribe(container => {
-      this.location = container.getLocation();
       this.tempClass = container.getTempClassDark();
-    }, err => {
-      switch (err.code) {
-      case 1:
-        this.locationError = 'Location denied';
-        break;
-      case 2:
-        this.locationError = 'Location unavailable';
-        break;
-      case 3:
-        this.locationError = 'Location timed out';
-        break;
-      }
     });
   }
 

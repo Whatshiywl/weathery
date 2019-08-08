@@ -1,5 +1,11 @@
 <div [class]="'navbar-wrapper ' + tempClass">
-    <span class="title">{{ title }}</span>
-    <span class="location">{{ location }}</span>
-    <weathery-switch [options]="options" (switch)=onTempUnitToggle($event)></weathery-switch>
+    <div class="navbar-item">
+        <span class="title">{{ title }}</span>
+    </div>
+    <div class="navbar-item">
+        <weathery-search-bar class="location"></weathery-search-bar>
+    </div>
+    <div class="navbar-item">
+        <weathery-switch [options]="tempUnitOptions" (switch)=onTempUnitToggle($event)></weathery-switch>
+    </div>
 </div>

@@ -2,29 +2,36 @@
 
 .navbar-wrapper {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    // background-color: darken($temp-color, 15%);
     width: 100%;
     height: 100%;
     color: black;
 
-    >.title {
-        font-size: 1.5em;
-    }
+    >.navbar-item {
+        flex-grow: 1;
+        flex-shrink: 1;
+        text-align: center;
 
-    >.location {
-        font-size: 1.2em;
+        >.title {
+            font-size: 1.5em;
+        }
+    
+        >.location {
+            font-size: 1.2em;
+        }
     }
 }
 
 @media screen and (min-width: $break-small) {
 
-    >.title {
-        font-size: 2em;
-    }
+    .navbar-wrapper >.navbar-item {
 
-    >.location {
-        font-size: 1.5em;
+        .title {
+            font-size: 2em;
+        }
+    
+        .location {
+            font-size: 1.5em;
+        }
     }
 }

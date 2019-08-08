@@ -10,6 +10,7 @@ import { CurrentWeatherComponent } from './components/weather/current/current-we
 import { DailyWeatherComponent } from './components/weather/daily/daily-weather.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { WeatherService } from './services/weather/weather.service';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WeatherService } from './services/weather/weather.service';
     SwitchComponent,
     CurrentWeatherComponent,
     DailyWeatherComponent,
-    NavbarComponent
+    NavbarComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

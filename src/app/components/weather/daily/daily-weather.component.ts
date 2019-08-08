@@ -17,7 +17,9 @@ export class DailyWeatherComponent implements OnInit {
 
   constructor(
     private weatherService: WeatherService
-  ) { }
+  ) {
+    this.tempClass = 'temp-color-50-light';
+  }
 
   ngOnInit() {
     this.precArray = [];
