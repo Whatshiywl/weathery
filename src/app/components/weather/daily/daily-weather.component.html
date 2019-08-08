@@ -7,7 +7,7 @@
         </span>
     </div>
     <div *ngIf="container" class="weather-display">
-        <img class="weather-img" id="weather-icon" [src]="getIcon().src" alt="getIcon().alt">
+        <img class="weather-img" id="weather-icon" [src]="getIcon().src" [alt]="getIcon().alt">
         <span class="weather-desc" for="weather-icon">{{ getIcon().alt }}</span>
         <div class="rain-display">
             <i *ngFor="let prec of precArray" class="wi" [ngClass]="getPrecClass(prec)"></i>
