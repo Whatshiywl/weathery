@@ -24,7 +24,9 @@ export class SearchBarComponent implements OnInit {
     .subscribe(container => {
       this.location = container.getLocation();
       this.tempClass = container.getTempClass();
-    }, err => {
+    });
+
+    this.weatherService.onError$().subscribe(err => {
       switch (err.code) {
       case 1:
         this.locationError = 'Location denied';

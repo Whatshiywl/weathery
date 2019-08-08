@@ -1,15 +1,15 @@
 @import 'src/assets/global.scss';
 
 .navbar-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    justify-items: stretch;
     align-items: center;
     width: 100%;
     height: 100%;
     color: black;
 
     >.navbar-item {
-        flex-grow: 1;
-        flex-shrink: 1;
         text-align: center;
 
         >.title {
@@ -18,6 +18,11 @@
     
         >.location {
             font-size: 1.2em;
+        }
+
+        &.switch {
+            justify-self: right;
+            margin-right: 10%;
         }
     }
 }

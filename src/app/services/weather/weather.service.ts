@@ -26,14 +26,18 @@ export class WeatherService {
     return this.weatherSubject.asObservable();
   }
 
+  onError$() {
+    return this.errorSubject.asObservable();
+  }
+
   requestWeatherByID(id: number) {
     this.httpService.getWeatherByCityID(id)
-    .subscribe(this.emitWeather, this.emitError);
+    .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
   }
 
   requestWeatherByName(name: string) {
     this.httpService.getWeatherByCityName(name)
-    .subscribe(this.emitWeather, this.emitError);
+    .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
   }
 
   requestWeatherByBeoCoords() {
@@ -41,7 +45,7 @@ export class WeatherService {
       navigator.geolocation.getCurrentPosition(position => {
         this.httpService.getWeatherByGeoCoord(position.coords)
         .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
-      }, this.emitError, {
+      }, this.emitError.bind(this), {
         enableHighAccuracy: true
       });
     } else {
