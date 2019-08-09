@@ -1,14 +1,14 @@
 <div class="search-bar-wrapper">
     <div [class]="'search-bar-item input-wrapper ' + tempClass">
-        <input type="text" [value]="location">
+        <input type="text" [(ngModel)]="location" (sumbit)="onSearch()">
     </div>
     <div class="search-bar-item">
-        <label (click)="onSearch($event)">
+        <label (click)="onSearch()">
             <fa-icon [icon]="faSearch"></fa-icon>
         </label>
     </div>
     <div class="search-bar-item">
-        <label (click)="onGeolocation($event)">
+        <label (click)="onGeolocation()">
             <fa-icon [icon]="faCrosshairs"></fa-icon>
         </label>
     </div>

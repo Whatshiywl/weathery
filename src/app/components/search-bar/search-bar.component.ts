@@ -42,11 +42,11 @@ export class SearchBarComponent implements OnInit {
     });
   }
 
-  onGeolocation(evt: MouseEvent) {
+  onGeolocation() {
     this.weatherService.requestWeatherByBeoCoords();
   }
 
-  onSearch(evt: MouseEvent) {
+  onSearch() {
     this.weatherService.requestWeatherByName(this.location);
   }
 

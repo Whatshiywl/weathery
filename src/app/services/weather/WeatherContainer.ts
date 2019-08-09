@@ -108,7 +108,7 @@ export class WeatherContainer {
     }
 
     private update() {
-        this.location = this.weather.name;
+        this.location = `${this.weather.name},${this.weather.sys.country}`;
         this.comfort = this.calcComfort();
         this.icon = {
             src: `https://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`,
