@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather/weather.service';
+import { faSearch, faCrosshairs } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'weathery-search-bar',
@@ -7,6 +8,8 @@ import { WeatherService } from 'src/app/services/weather/weather.service';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
+  faSearch = faSearch;
+  faCrosshairs = faCrosshairs;
 
   location: string;
   tempClass: string;
@@ -40,11 +43,11 @@ export class SearchBarComponent implements OnInit {
   }
 
   onGeolocation(evt: MouseEvent) {
-    console.log(evt);
+    this.weatherService.requestWeatherByBeoCoords();
   }
 
   onSearch(evt: MouseEvent) {
-    console.log(evt);
+    this.weatherService.requestWeatherByName(this.location);
   }
 
 }

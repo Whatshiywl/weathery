@@ -6,7 +6,6 @@ $height: 2em;
 
     >.search-bar-item {
         margin: 0 1%;
-        height: 100%;
 
         &.input-wrapper {
             display: flex;
@@ -14,11 +13,9 @@ $height: 2em;
             justify-content: center;
             border-radius: $height*0.5;
             border: none;
-            // background-color: #ccc;
 
             input {
                 background-color: transparent;
-                // height: 100%;
                 border: none;
                 outline: none;
                 font-size: 1em;
@@ -29,8 +26,9 @@ $height: 2em;
         >label {
             cursor: pointer;
 
-            >.wi {
-                font-size: $height;
+            >fa-icon {
+                vertical-align: middle;
+                color: #393939;
             }
         }
     }
