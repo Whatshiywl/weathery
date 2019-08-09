@@ -1,6 +1,6 @@
 @import 'src/assets/global.scss';
 
-$height: 36px;
+$height: 1.5em;
 $width: $height*1.76;
 $background: $neutral-color;
 $font-color: black;
@@ -46,7 +46,7 @@ $font-color: black;
 
             >p {
                 color: $font-color;
-                font-size: $height*0.6;
+                font-size: 1em;
                 text-align: center;
                 flex-grow: 1;
             }
@@ -61,6 +61,94 @@ $font-color: black;
             bottom: $height*0.12;
             -webkit-transition: .4s;
             transition: .4s;
+        }
+    }
+}
+
+@media screen and (min-width: $break-small) {
+    $height: 2em;
+    $width: $height*1.76;
+
+    /* The switch - the box around the slider */
+    .switch {
+        width: $width;
+        height: $height;
+    
+        /* Hide default HTML checkbox */
+        >input {
+    
+          &:checked + .slider>.before {
+              -webkit-transform: translateX($height*0.76);
+              -ms-transform: translateX($height*0.76);
+              transform: translateX($height*0.76);
+          }
+        }
+    
+        /* Rounded sliders */
+        .round-corners {
+            border-radius: $height*0.5;
+        }
+    
+        /* The slider */
+        >.slider {
+    
+            >.options {
+    
+                >p {
+                    font-size: 1.2em;
+                }
+            }
+    
+            >.before {
+                height: $height*0.76;
+                width: $height*0.76;
+                left: $height*0.12;
+                bottom: $height*0.12;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: $break-big) {
+    $height: 2.5em;
+    $width: $height*1.76;
+
+    /* The switch - the box around the slider */
+    .switch {
+        width: $width;
+        height: $height;
+    
+        /* Hide default HTML checkbox */
+        >input {
+    
+          &:checked + .slider>.before {
+              -webkit-transform: translateX($height*0.76);
+              -ms-transform: translateX($height*0.76);
+              transform: translateX($height*0.76);
+          }
+        }
+    
+        /* Rounded sliders */
+        .round-corners {
+            border-radius: $height*0.5;
+        }
+    
+        /* The slider */
+        >.slider {
+    
+            >.options {
+    
+                >p {
+                    font-size: 1.5em;
+                }
+            }
+    
+            >.before {
+                height: $height*0.76;
+                width: $height*0.76;
+                left: $height*0.12;
+                bottom: $height*0.12;
+            }
         }
     }
 }

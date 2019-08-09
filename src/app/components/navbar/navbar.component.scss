@@ -11,13 +11,15 @@
 
     >.navbar-item {
         text-align: center;
+        height: 1.5em;
 
         >.title {
-            font-size: 1.5em;
+            font-size: 1.2em;
+            line-height: 100%;
         }
     
         >.location {
-            font-size: 1.2em;
+            font-size: 1em;
         }
 
         &.switch {
@@ -30,6 +32,22 @@
 @media screen and (min-width: $break-small) {
 
     .navbar-wrapper >.navbar-item {
+        height: 2em;
+
+        .title {
+            font-size: 1.5em;
+        }
+    
+        .location {
+            font-size: 1.2em;
+        }
+    }
+}
+
+@media screen and (min-width: $break-big) {
+
+    .navbar-wrapper >.navbar-item {
+        height: 2.5em;
 
         .title {
             font-size: 2em;

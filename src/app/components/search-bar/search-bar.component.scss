@@ -2,9 +2,11 @@ $height: 2em;
 
 .search-bar-wrapper {
     display: flex;
+    height: 100%;
 
     >.search-bar-item {
         margin: 0 1%;
+        height: 100%;
 
         &.input-wrapper {
             display: flex;
@@ -12,11 +14,11 @@ $height: 2em;
             justify-content: center;
             border-radius: $height*0.5;
             border: none;
-            background-color: #ccc;
+            // background-color: #ccc;
 
             input {
                 background-color: transparent;
-                height: $height;
+                // height: 100%;
                 border: none;
                 outline: none;
                 font-size: 1em;

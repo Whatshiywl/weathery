@@ -1,5 +1,5 @@
 <div class="search-bar-wrapper">
-    <div class="search-bar-item input-wrapper">
+    <div [class]="'search-bar-item input-wrapper ' + tempClass">
         <input type="text" [value]="location">
     </div>
     <div *ngIf="false" class="search-bar-item">
