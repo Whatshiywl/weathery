@@ -25,9 +25,10 @@ $height: 2em;
 
         >label {
             cursor: pointer;
+            display: inline-block;
+            vertical-align: middle;
 
             >fa-icon {
-                vertical-align: middle;
                 color: #393939;
             }
         }

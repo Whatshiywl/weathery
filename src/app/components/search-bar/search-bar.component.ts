@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather/weather.service';
 import { faSearch, faCrosshairs } from '@fortawesome/free-solid-svg-icons';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'weathery-search-bar',
@@ -11,32 +12,34 @@ export class SearchBarComponent implements OnInit {
   faSearch = faSearch;
   faCrosshairs = faCrosshairs;
 
-  location: string;
+  location: FormControl;
+
+  // location: string;
   tempClass: string;
 
   constructor(
     private weatherService: WeatherService
   ) {
-    this.location = 'Loading...';
+    this.location = new FormControl('Loading...');
   }
 
   ngOnInit() {
     this.weatherService.onWeather$()
     .subscribe(container => {
-      this.location = container.getLocation();
+      this.location.setValue(container.getLocation());
       this.tempClass = container.getTempClass();
     });
 
     this.weatherService.onError$().subscribe(err => {
       switch (err.code) {
       case 1:
-        this.location = 'Location denied';
+        this.location.setValue('Location denied');
         break;
       case 2:
-        this.location = 'Location unavailable';
+        this.location.setValue('Location unavailable');
         break;
       case 3:
-        this.location = 'Location timed out';
+        this.location.setValue('Location timed out');
         break;
       }
     });
@@ -47,7 +50,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSearch() {
-    this.weatherService.requestWeatherByName(this.location);
+    this.weatherService.requestWeatherByName(this.location.value);
   }
 
 }

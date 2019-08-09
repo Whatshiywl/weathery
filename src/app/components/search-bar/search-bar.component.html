@@ -1,6 +1,6 @@
-<div class="search-bar-wrapper">
+<form class="search-bar-wrapper" (submit)=onSearch()>
     <div [class]="'search-bar-item input-wrapper ' + tempClass">
-        <input type="text" [(ngModel)]="location" (sumbit)="onSearch()">
+        <input type="text" [formControl]="location">
     </div>
     <div class="search-bar-item">
         <label (click)="onSearch()">
@@ -12,4 +12,4 @@
             <fa-icon [icon]="faCrosshairs"></fa-icon>
         </label>
     </div>
-</div>
+</form>
