@@ -3,8 +3,8 @@ const AdmZip = require('adm-zip');
 const zipName = 'city.list.json.zip';
 const dict = {};
 
-function parseName(name, separator = / |-/) {
-    return name.toLowerCase().split(separator).filter(Boolean).map(s => s.trim());
+function parseName(name) {
+    return name.toLowerCase().split(/ |-/).filter(Boolean).map(s => s.trim());
 }
 
 console.log(`Extracting ${zipName}...`);
@@ -14,7 +14,7 @@ if (zipEntries.length < 1) {
     throw new Error('Error: No city.list.json to unzip');
 }
 const cities = JSON.parse(zipEntries[0].getData().toString('utf8'));
-console.log(`Loaded ${cities.length} cities`);
+console.log(`Loaded ${cities.length} locations`);
 
 console.log('Indexing...');
 cities.forEach(city => {
@@ -28,9 +28,10 @@ cities.forEach(city => {
 });
 console.log('Finished indexing');
 
-function find(query, top) {
-    const [cityName, country] = parseName(query, ',');
+function find(cityName, country, top) {
     const entries = [];
+    cityName = cityName || '';
+    country = country ? country.trim().toLowerCase() : '';
     const cityNames = parseName(cityName);
     cityNames.forEach(name => {
         const cities = dict[name];
@@ -65,7 +66,7 @@ function find(query, top) {
 module.exports.find = find;
 
 // const start = Date.now();
-// const found = find('Island, au', 50);
+// const found = find();
 // const dt = Date.now() - start;
 // found
 // .map(entry => `${entry.city.country}\t${entry.score.toFixed(20)}\t${entry.city.coord.lat},${entry.city.coord.lon}\t${entry.city.name}`)

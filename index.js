@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const proxy = require('http-proxy-middleware');
+const citydb = require('./citydb.js');
 // Run the app by serving the static files
 // in the dist directory
 const folder = '/dist/weathery';
@@ -19,7 +20,20 @@ const openweatherapi = proxy({
 app.use(express.static(__dirname + folder));
 app.use('/api', openweatherapi);
 
-app.get('/*', function(req,res) {
+app.get('/find', (req, res) => {
+  const name = req.query.name || '';
+  const country = req.query.country || '';
+  const top = req.query.top;
+
+  const results = citydb.find(name, country, top);
+  const status = results.length ? 200 : 204;
+
+  res.status(status).json({
+    size: results.length,
+    results
+  });
+});
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname + folder + '/index.html'));
 });
 
