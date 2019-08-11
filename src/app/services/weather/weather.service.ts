@@ -31,12 +31,12 @@ export class WeatherService {
   }
 
   requestWeatherByID(id: number) {
-    this.httpService.getWeatherByCityID(id)
+    this.httpService.getWeatherByID(id)
     .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
   }
 
   requestWeatherByName(name: string) {
-    this.httpService.getWeatherByCityName(name)
+    this.httpService.getWeatherByName(name)
     .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
   }
 

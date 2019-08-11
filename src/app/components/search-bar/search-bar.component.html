@@ -1,12 +1,16 @@
-<form class="search-bar-wrapper" (submit)=onSearch()>
-    <div [class]="'search-bar-item input-wrapper ' + tempClass">
+<form class="search-bar-wrapper">
+    <div [class]="'search-bar-item input-wrapper ' + tempClass + (showResults ? ' show' : '')">
+        <weathery-search-results 
+        [class]="tempClass + (showResults ? ' show' : '')" 
+        [search]="searchResults"
+        (selected)="onResultSelected($event)"></weathery-search-results>
         <input type="text" [formControl]="location">
     </div>
-    <div class="search-bar-item">
+    <!-- <div class="search-bar-item">
         <label (click)="onSearch()">
             <fa-icon [icon]="faSearch"></fa-icon>
         </label>
-    </div>
+    </div> -->
     <div class="search-bar-item">
         <label (click)="onGeolocation()">
             <fa-icon [icon]="faCrosshairs"></fa-icon>

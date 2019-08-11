@@ -1,0 +1,23 @@
+$height: 2em;
+
+.results-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #393939;
+    overflow: hidden;
+
+    >.result-item {
+        display: flex;
+        justify-items: left;
+        align-items: center;
+        padding: 2% 5%;
+        border-bottom: 1px solid #666;
+        
+        >span {
+            color: black;
+            font-size: 1em;
+            word-wrap: break-word;
+            text-align: left;
+        }
+    }
+}

@@ -14,6 +14,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 
 import { HttpService } from './services/http/http.service';
 import { WeatherService } from './services/weather/weather.service';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { WeatherService } from './services/weather/weather.service';
     CurrentWeatherComponent,
     DailyWeatherComponent,
     NavbarComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,

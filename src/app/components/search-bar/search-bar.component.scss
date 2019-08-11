@@ -6,13 +6,23 @@ $height: 2em;
 
     >.search-bar-item {
         margin: 0 1%;
+        transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        -webkit-transition: none;
 
         &.input-wrapper {
+            position: relative;
             display: flex;
             flex-grow: 1;
             justify-content: center;
             border-radius: $height*0.5;
             border: none;
+            box-sizing: border-box;
+
+            &[class*="show"] {
+                border: 1px solid #393939;
+            }
 
             input {
                 background-color: transparent;
@@ -20,6 +30,30 @@ $height: 2em;
                 outline: none;
                 font-size: 1em;
                 width: calc(100% - #{$height}/2);
+                z-index: 2;
+            }
+
+            weathery-search-results {
+                position: absolute;
+                width: 100%;
+                padding: 0;
+                height: 0;
+                border: none;
+                opacity: 0;
+                top: calc(#{$height}/2 - 2px);
+                left: -1px;
+                color: black;
+                border-radius: 0 0 $height/2 $height/2;
+                z-index: 1;
+
+                &[class*="show"] {
+                    height: auto;
+                    border: 1px solid #393939;
+                    padding-top: $height/4;
+                    padding-bottom: $height/2;
+                    border-top: none;
+                    opacity: 1;
+                }
             }
         }
 

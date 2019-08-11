@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './services/weather/weather.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { WeatherService } from './services/weather/weather.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'Weathery';
   tempClass: string;
   
@@ -19,10 +19,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     .subscribe(container => {
       this.tempClass = container.getTempClass();
     });
-  }
-
-  ngAfterViewInit() {
-    this.weatherService.requestWeatherByBeoCoords();
   }
 
 }

@@ -1,0 +1,10 @@
+<div class="results-wrapper">
+    <div *ngFor="let result of search?.results; let i = index" 
+    [class]="'result-item ' + (i === hovered ? selectedClass : '')"
+    (mouseover)="onMouseHover(i)"
+    (click)="onClick(i)">
+        <span>
+            {{ result.city.name }}
+        </span>
+    </div>
+</div>
