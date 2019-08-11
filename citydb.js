@@ -34,19 +34,34 @@ function find(cityName, country, top) {
     country = country ? country.trim().toLowerCase() : '';
     const cityNames = parseName(cityName);
     cityNames.forEach(name => {
+        const matches = [];
         const cities = dict[name];
-        if (!cities) return;
-        const weight = 1/cities.length;
-        cities.forEach(city => {
-            if (country && city.country.toLowerCase() !== country) return;
-            const i = entries.findIndex(entry => entry.city.id === city.id);
-            if (i === -1) {
-                entries.push({
-                    city, score: weight
-                });
-            } else {
-                entries[i].score += weight;
-            }
+        if (cities) {
+            matches.push({cities: dict[name], score: 1});
+        } else {
+            Object.keys(dict).forEach(indexedName => {
+                const match = indexedName.match(name);
+                if (!match) return;
+                const score = 1 - Math.abs(match[0].length - indexedName.length)/indexedName.length;
+                if (score < 0) return;
+                matches.push({cities: dict[indexedName], score});
+            });
+        }
+        matches.forEach(match => {
+            const cities = match.cities;
+            let score = match.score
+            score /= cities.length;
+            cities.forEach(city => {
+                if (country && city.country.toLowerCase() !== country) return;
+                const i = entries.findIndex(entry => entry.city.id === city.id);
+                if (i === -1) {
+                    entries.push({
+                        city, score
+                    });
+                } else {
+                    entries[i].score += score;
+                }
+            });
         });
     });
     entries.forEach(entry => {
@@ -55,8 +70,8 @@ function find(cityName, country, top) {
             const cities = dict[name];
             if (!cities) return;
             if (cityNames.includes(name)) return;
-            const weight = 1/cities.length;
-            entry.score -= weight;
+            const score = 1/cities.length;
+            entry.score -= score;
         });
     });
     return entries
@@ -65,10 +80,16 @@ function find(cityName, country, top) {
 }
 module.exports.find = find;
 
-// const start = Date.now();
-// const found = find();
-// const dt = Date.now() - start;
-// found
-// .map(entry => `${entry.city.country}\t${entry.score.toFixed(20)}\t${entry.city.coord.lat},${entry.city.coord.lon}\t${entry.city.name}`)
-// .forEach(f => console.log(f));
-// console.log(`Done in ${dt} ms`);
+function testFind(cityName, country, top) {
+    const start = Date.now();
+    const founds = (find(cityName, country, top) || []).slice(0, 10);
+    const dt = Date.now() - start;
+    console.log(`Found ${founds.length} results for ${cityName}${country ? `,${country}` : ''} in ${dt} ms`);
+    if (founds.length) {
+        founds.forEach(found => {
+            console.log(`${found.city.name},${found.city.country}`);
+        });
+    }
+}
+
+testFind('Rio de Janei');
