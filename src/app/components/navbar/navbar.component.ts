@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WeatherService } from 'src/app/services/weather/weather.service';
-import { TempUnit } from 'src/app/services/weather/WeatherContainer';
+import { WeatherService } from '../../services/weather/weather.service';
+import { TempUnit } from '../../models/WeatherContainer';
 
 @Component({
   selector: 'weathery-navbar',
