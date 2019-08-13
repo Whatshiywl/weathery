@@ -25,7 +25,7 @@ export class GeolocationService {
   requestCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        this.emitPosition.bind(this), 
+        this.emitPosition.bind(this),
         this.emitError.bind(this), {
         enableHighAccuracy: true
       });

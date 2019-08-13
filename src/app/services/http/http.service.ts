@@ -71,9 +71,15 @@ export class HttpService {
 
   getLocationsByName(name?: string, country?: string, top?: number) {
     let params = new HttpParams();
-    if (name) params = params.set('name', name);
-    if (country) params = params.set('country', country);
-    if (top) params = params.set('top', top.toString());
+    if (name) {
+      params = params.set('name', name);
+    }
+    if (country) {
+      params = params.set('country', country);
+    }
+    if (top) {
+      params = params.set('top', top.toString());
+    }
     return this.get<SearchResults>(this.getFindLocationUrl, params);
   }
 

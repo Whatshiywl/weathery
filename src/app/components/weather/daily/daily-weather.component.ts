@@ -50,10 +50,10 @@ export class DailyWeatherComponent implements OnInit {
     const weather = this.container.getWeather();
     const isRaining = weather && weather.rain;
     const isSnowing = weather && weather.snow;
-    const currentPrec = isSnowing ? weather.snow["3h"] : (isRaining ? weather.rain["3h"] : 0);
+    const currentPrec = isSnowing ? weather.snow['3h'] : (isRaining ? weather.rain['3h'] : 0);
     return {
-      "wi-raindrop": !isSnowing,
-      "wi-snowflake-cold": isSnowing,
+      'wi-raindrop': !isSnowing,
+      'wi-snowflake-cold': isSnowing,
       empty: prec >= currentPrec
     };
   }

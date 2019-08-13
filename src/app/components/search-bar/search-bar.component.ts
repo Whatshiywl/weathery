@@ -15,7 +15,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   faCrosshairs = faCrosshairs;
 
   location: FormControl;
-  
+
   waitingSearch: boolean;
   searchResults: SearchResults;
 
@@ -39,7 +39,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
           this.searchResults = undefined;
           this.showResults = false;
           return;
-        };
+        }
         this.searchResults = res;
         this.showResults = true;
       });

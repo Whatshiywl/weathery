@@ -11,7 +11,7 @@ export class SwitchComponent implements OnInit {
   @Output() switch: EventEmitter<string> = new EventEmitter<string>();
 
   backClass: string;
-  sliderClass: string
+  sliderClass: string;
 
   private selected = false;
 

@@ -9,7 +9,7 @@ import { WeatherService } from './services/weather/weather.service';
 export class AppComponent implements OnInit {
   title = 'Weathery';
   tempClass: string;
-  
+
   constructor(
     private weatherService: WeatherService
   ) { }

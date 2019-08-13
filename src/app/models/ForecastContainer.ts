@@ -8,7 +8,7 @@ export interface Forecast {
     list: Weather[];
     city: City;
 }
-  
+
 export class ForecastContainer {
     private location: string;
     private forecast: Forecast;
@@ -32,7 +32,7 @@ export class ForecastContainer {
         this.location = `${this.forecast.city.name},${this.forecast.city.country}`;
         return newContainer;
     }
-    
+
     getLocation() {
         return this.location;
     }

@@ -9,7 +9,7 @@ import { TempUnit } from '../../models/WeatherContainer';
 })
 export class NavbarComponent implements OnInit {
   @Input() title: string;
-  
+
   tempClass: string;
   tempUnitOptions = ['F', 'C'];
 

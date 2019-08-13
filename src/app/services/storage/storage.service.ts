@@ -3,10 +3,10 @@ import { TempUnit } from 'src/app/models/WeatherContainer';
 
 interface Storage {
   unit: TempUnit;
-};
+}
 
 type FilterStorage<Condition> = {
-  [Key in keyof Storage]: 
+  [Key in keyof Storage]:
     Storage[Key] extends Condition ? Key : never;
 }[keyof Storage];
 
@@ -66,7 +66,7 @@ export class StorageService {
       return JSON.parse(storedValue) as T;
     } catch (error) {
       console.error('Could not parse', storedValue);
-      console.error(error);;      
+      console.error(error);
     }
   }
 

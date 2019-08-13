@@ -39,12 +39,12 @@ export interface Weather {
     speed: number;
   };
   rain: {
-    "1h": number;
-    "3h": number;
+    '1h': number;
+    '3h': number;
   };
   snow: {
-    "1h": number;
-    "3h": number;
+    '1h': number;
+    '3h': number;
   };
 }
 
