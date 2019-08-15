@@ -47,6 +47,10 @@ export class WeatherService {
     this.geolocationService.requestCurrentPosition();
   }
 
+  setWeather(weather: Weather) {
+    this.emitWeather(weather);
+  }
+
   setTempUnit(unit: TempUnit) {
     this.weatherContainer = this.weatherContainer.setUnit(unit);
     this.emitWeather(this.weatherContainer.getWeather());

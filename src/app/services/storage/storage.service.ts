@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { TempUnit } from 'src/app/models/WeatherContainer';
+import { Weather } from 'src/app/models/WeatherContainer';
 
 interface Storage {
-  unit: TempUnit;
-  str: string;
+  weather: Weather
 }
 
 type FilterStorage<Condition> = {
@@ -35,16 +34,16 @@ export class StorageService {
         storeValue = String(value);
         break;
       case 'object':
-        storeValue = JSON.stringify(value);
+        storeValue = value ? JSON.stringify(value) : undefined;
         break;
       default:
         throw new TypeError(`Unsuported type ${valueType} for value`);
     }
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, storeValue);
   }
 
   get<T extends keyof Storage>(key: T) {
-    return this.retreive(key) as Storage[T];
+    return this.retreive(key);
   }
 
   getString(key: StringStorage) {
@@ -52,17 +51,18 @@ export class StorageService {
   }
 
   getNumber(key: NumberStorage) {
-    return Number(this.retreive(key));
+    return Number(this.retreive(key)) as Storage[NumberStorage];
   }
 
   getBoolean(key: BooleanStorage) {
-    return this.retreive(key) === 'true';
+    return this.retreive(key) === 'true' as Storage[BooleanStorage];
   }
 
-  getObject<T = any>(key: ObjectStorage) {
+  getObject(key: ObjectStorage) {
     const storedValue = this.retreive(key);
+    if (!storedValue || ['undefined', 'null'].includes(storedValue)) return undefined;
     try {
-      return JSON.parse(storedValue) as T;
+      return JSON.parse(storedValue);
     } catch (error) {
       console.error('Could not parse', storedValue);
       console.error(error);

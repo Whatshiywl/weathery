@@ -3,7 +3,7 @@
         <weathery-search-results 
         [class]="tempClass + (showResults ? ' show' : '')" 
         [search]="searchResults"
-        (selected)="onResultSelected($event)"></weathery-search-results>
+        (selected)="onResultSelected($event?.id)"></weathery-search-results>
         <input type="text" [formControl]="location">
     </div>
     <div class="search-bar-item">

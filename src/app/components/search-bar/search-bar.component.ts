@@ -4,6 +4,8 @@ import { faSearch, faCrosshairs } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { HttpService, SearchResults, City } from 'src/app/services/http/http.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { Weather } from 'src/app/models/WeatherContainer';
 
 @Component({
   selector: 'weathery-search-bar',
@@ -22,58 +24,49 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   showResults: boolean;
   tempClass: string;
 
-  lastUpdate: number;
-
   constructor(
     private weatherService: WeatherService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private storageService: StorageService
   ) {
     this.location = new FormControl('Loading...');
     this.showResults = false;
-    this.location.valueChanges.pipe(debounceTime(500)).subscribe((value: string) => {
-      if (this.waitingSearch) {
-        this.waitingSearch = false;
-        return;
-      }
-      const [name, country] = value.split(',').map(s => s.trim());
-      this.httpService.getLocationsByName(name, country, 5).subscribe(res => {
-        if (!res || !res.size) {
-          this.searchResults = undefined;
-          this.showResults = false;
-          return;
-        }
-        this.searchResults = res;
-        this.showResults = true;
-      });
-    });
   }
 
   ngOnInit() {
+    this.location.valueChanges.pipe(debounceTime(500)).subscribe(this.onSearch.bind(this));
+
     this.weatherService.onWeather$()
     .subscribe(container => {
-      if (container.getWeather().dt === this.lastUpdate) return;
-      this.location.setValue(container.getLocation());
+      const lastWeather = this.storageService.getObject('weather') as Weather;
+      if (lastWeather && container.getWeather().dt === lastWeather.dt) return;
+      this.setWeather(container.getWeather());
       this.tempClass = container.getTempClass();
-      this.lastUpdate = container.getWeather().dt;
     });
 
     this.weatherService.onError$().subscribe(err => {
       switch (err.code) {
       case 1:
-        this.location.setValue('Location denied');
+        alert('Location denied');
         break;
       case 2:
-        this.location.setValue('Location unavailable');
+        alert('Location unavailable');
         break;
       case 3:
-        this.location.setValue('Location timed out');
+        alert('Location timed out');
         break;
       }
     });
   }
 
   ngAfterViewInit() {
-    this.onGeolocation();
+    const weather = this.storageService.getObject('weather') as Weather;
+    if (weather) {
+      this.onResultSelected(weather.id);
+      this.storageService.set('weather', undefined);
+    } else {
+      this.onGeolocation();
+    }
   }
 
   onGeolocation() {
@@ -81,11 +74,33 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     this.weatherService.requestWeatherByBeoCoords();
   }
 
-  onResultSelected(selected: City) {
+  onSearch(value: string) {
+    if (this.waitingSearch) {
+      this.waitingSearch = false;
+      return;
+    }
+    const [name, country] = value.split(',').map(s => s.trim());
+    this.httpService.getLocationsByName(name, country, 5).subscribe(res => {
+      if (!res || !res.size) {
+        this.searchResults = undefined;
+        this.showResults = false;
+        return;
+      }
+      this.searchResults = res;
+      this.showResults = true;
+    });
+  }
+
+  onResultSelected(id: number) {
     this.waitingSearch = true;
     this.searchResults = undefined;
     this.showResults = false;
-    this.weatherService.requestWeatherByID(selected.id);
+    this.weatherService.requestWeatherByID(id);
+  }
+
+  setWeather(weather: Weather) {
+    this.location.setValue(`${weather.name},${weather.sys.country}`);
+    this.storageService.set('weather', weather);
   }
 
 }
