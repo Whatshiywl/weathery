@@ -3,6 +3,7 @@ import { TempUnit } from 'src/app/models/WeatherContainer';
 
 interface Storage {
   unit: TempUnit;
+  str: string;
 }
 
 type FilterStorage<Condition> = {
@@ -19,8 +20,6 @@ type ObjectStorage = FilterStorage<object>;
   providedIn: 'root'
 })
 export class StorageService {
-
-  storage: any = {};
 
   constructor() { }
 
@@ -41,27 +40,27 @@ export class StorageService {
       default:
         throw new TypeError(`Unsuported type ${valueType} for value`);
     }
-    this.storage[key] = storeValue;
+    localStorage.setItem(key, value);
   }
 
-  getAny<T extends keyof Storage>(key: T) {
-    return this.get(key);
+  get<T extends keyof Storage>(key: T) {
+    return this.retreive(key) as Storage[T];
   }
 
   getString(key: StringStorage) {
-    return this.get(key);
+    return this.retreive(key) as Storage[StringStorage];
   }
 
   getNumber(key: NumberStorage) {
-    return Number(this.get(key));
+    return Number(this.retreive(key));
   }
 
   getBoolean(key: BooleanStorage) {
-    return this.get(key) === 'true';
+    return this.retreive(key) === 'true';
   }
 
   getObject<T = any>(key: ObjectStorage) {
-    const storedValue = this.get(key);
+    const storedValue = this.retreive(key);
     try {
       return JSON.parse(storedValue) as T;
     } catch (error) {
@@ -70,7 +69,7 @@ export class StorageService {
     }
   }
 
-  private get(key: string) {
+  private retreive(key: string) {
     return localStorage.getItem(key);
   }
 }

@@ -6,6 +6,7 @@
         <weathery-search-bar class="location"></weathery-search-bar>
     </div>
     <div class="navbar-item switch">
-        <weathery-switch [options]="tempUnitOptions" (switch)=onTempUnitToggle($event)></weathery-switch>
+        <weathery-switch [backClass]="switchBackClass" [sliderClass]="switchSliderClass"
+        [options]="tempUnitOptions" (switch)=onTempUnitToggle($event)></weathery-switch>
     </div>
 </div>
