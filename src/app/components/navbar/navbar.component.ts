@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private weatherService: WeatherService,
-    private StorageService: StorageService
   ) {
     this.tempClass = 'temp-color-50-dark';
     this.switchBackClass = 'temp-color-50';

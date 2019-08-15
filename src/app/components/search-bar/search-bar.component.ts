@@ -22,6 +22,8 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   showResults: boolean;
   tempClass: string;
 
+  lastUpdate: number;
+
   constructor(
     private weatherService: WeatherService,
     private httpService: HttpService
@@ -49,8 +51,10 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.weatherService.onWeather$()
     .subscribe(container => {
+      if (container.getWeather().dt === this.lastUpdate) return;
       this.location.setValue(container.getLocation());
       this.tempClass = container.getTempClass();
+      this.lastUpdate = container.getWeather().dt;
     });
 
     this.weatherService.onError$().subscribe(err => {
@@ -79,6 +83,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   onResultSelected(selected: City) {
     this.waitingSearch = true;
+    this.searchResults = undefined;
     this.showResults = false;
     this.weatherService.requestWeatherByID(selected.id);
   }
