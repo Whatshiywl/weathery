@@ -109,7 +109,7 @@ $font-color: black;
     }
 }
 
-@media screen and (min-width: $break-big) {
+@media screen and (min-width: $break-medium) {
     $height: 2.5em;
     $width: $height*1.76;
 

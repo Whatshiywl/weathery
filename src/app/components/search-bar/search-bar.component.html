@@ -1,14 +1,16 @@
-<form class="search-bar-wrapper">
-    <div [class]="'search-bar-item input-wrapper ' + tempClass + (showResults ? ' show' : '')">
-        <weathery-search-results 
-        [class]="tempClass + (showResults ? ' show' : '')" 
-        [search]="searchResults"
-        (selected)="onResultSelected($event?.id)"></weathery-search-results>
-        <input type="text" [formControl]="location">
-    </div>
-    <div class="search-bar-item">
-        <label (click)="onGeolocation()">
+<div [class]="'wrapper-wrapper ' + tempClass">
+    <div class="grid">
+        <form class="search-bar-wrapper">
+            <input type="text" [formControl]="location">
+        </form>
+        <div (click)="onGeolocation()">
             <fa-icon [icon]="faCrosshairs"></fa-icon>
-        </label>
+        </div>
+        <p
+        *ngFor="let result of searchResults?.results; let i = index"
+        [ngClass]="selected === i ? selectedClass : ''"
+        (mouseover)="onHover(i)" (click)="onClick(i)">
+            {{result.city.name}},{{result.city.country}}
+        </p>
     </div>
-</form>
+</div>

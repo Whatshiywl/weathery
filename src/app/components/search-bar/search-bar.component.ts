@@ -3,7 +3,7 @@ import { WeatherService } from 'src/app/services/weather/weather.service';
 import { faSearch, faCrosshairs } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { HttpService, SearchResults, City } from 'src/app/services/http/http.service';
+import { HttpService, SearchResults } from 'src/app/services/http/http.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Weather } from 'src/app/models/WeatherContainer';
 import { ForecastService } from 'src/app/services/forecast/forecast.service';
@@ -18,12 +18,13 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   faCrosshairs = faCrosshairs;
 
   location: FormControl;
+  
+  tempClass: string;
 
   waitingSearch: boolean;
   searchResults: SearchResults;
-
-  showResults: boolean;
-  tempClass: string;
+  selected: number;
+  selectedClass: string;
 
   constructor(
     private weatherService: WeatherService,
@@ -32,7 +33,6 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     private storageService: StorageService
   ) {
     this.location = new FormControl('Loading...');
-    this.showResults = false;
   }
 
   ngOnInit() {
@@ -44,6 +44,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
       if (lastWeather && container.getWeather().dt === lastWeather.dt) return;
       this.setWeather(container.getWeather());
       this.tempClass = container.getTempClass();
+      this.selectedClass = container.getTempClassDark();
     });
 
     this.weatherService.onError$().subscribe(err => {
@@ -86,18 +87,24 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     this.httpService.getLocationsByName(name, country, 5).subscribe(res => {
       if (!res || !res.size) {
         this.searchResults = undefined;
-        this.showResults = false;
         return;
       }
       this.searchResults = res;
-      this.showResults = true;
     });
   }
 
-  onResultSelected(id: number) {
+  onHover(i: number) {
+    this.selected = i;
+  }
+
+  onClick(i: number) {
+    const city = this.searchResults.results[i].city;
+    this.onResultSelected(city.id);
+  }
+
+  private onResultSelected(id: number) {
     this.waitingSearch = true;
     this.searchResults = undefined;
-    this.showResults = false;
     this.weatherService.requestWeatherByID(id);
     this.forecastService.requestForecastByID(id);
   }

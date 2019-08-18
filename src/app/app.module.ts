@@ -11,8 +11,6 @@ import { DailyWeatherComponent } from './components/weather/daily/daily-weather.
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
-import { SearchResultsComponent } from './components/search-results/search-results.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,8 +18,7 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     SwitchComponent,
     DailyWeatherComponent,
     NavbarComponent,
-    SearchBarComponent,
-    SearchResultsComponent
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
