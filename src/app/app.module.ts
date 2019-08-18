@@ -7,7 +7,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { ConvertTempPipe } from './pipes/convert-temp.pipe';
 import { SwitchComponent } from './components/switch/switch.component';
-import { CurrentWeatherComponent } from './components/weather/current/current-weather.component';
 import { DailyWeatherComponent } from './components/weather/daily/daily-weather.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -19,7 +18,6 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     AppComponent,
     ConvertTempPipe,
     SwitchComponent,
-    CurrentWeatherComponent,
     DailyWeatherComponent,
     NavbarComponent,
     SearchBarComponent,
