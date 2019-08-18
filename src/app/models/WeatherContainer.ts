@@ -60,9 +60,7 @@ export class WeatherContainer {
     };
 
     static from(weather: Weather) {
-      const newContainer = new WeatherContainer();
-      newContainer.setWeather(weather);
-      return newContainer;
+      return new WeatherContainer().setWeather(weather);
     }
 
     constructor(private unit: TempUnit = 'C') { }

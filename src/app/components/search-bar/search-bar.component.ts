@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 import { HttpService, SearchResults, City } from 'src/app/services/http/http.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Weather } from 'src/app/models/WeatherContainer';
+import { ForecastService } from 'src/app/services/forecast/forecast.service';
 
 @Component({
   selector: 'weathery-search-bar',
@@ -26,6 +27,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
 
   constructor(
     private weatherService: WeatherService,
+    private forecastService: ForecastService,
     private httpService: HttpService,
     private storageService: StorageService
   ) {
@@ -72,6 +74,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
   onGeolocation() {
     this.waitingSearch = true;
     this.weatherService.requestWeatherByBeoCoords();
+    this.forecastService.requestForecastByBeoCoords();
   }
 
   onSearch(value: string) {
@@ -96,6 +99,7 @@ export class SearchBarComponent implements OnInit, AfterViewInit {
     this.searchResults = undefined;
     this.showResults = false;
     this.weatherService.requestWeatherByID(id);
+    this.forecastService.requestForecastByID(id);
   }
 
   setWeather(weather: Weather) {

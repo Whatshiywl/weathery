@@ -37,7 +37,7 @@ export class ForecastService {
   requestForecastByBeoCoords() {
     this.geolocationService.onGeolocation$().pipe(first())
     .subscribe(coords => {
-      this.httpService.getWeatherByGeoCoord(coords)
+      this.httpService.getForecastByGeoCoord(coords)
       .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
     });
     this.geolocationService.requestCurrentPosition();

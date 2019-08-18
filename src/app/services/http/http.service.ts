@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Weather } from '../../models/WeatherContainer';
+import { Forecast } from 'src/app/models/ForecastContainer';
 
 export interface City {
   id: number;
@@ -59,14 +60,14 @@ export class HttpService {
   getForecastById(id: number) {
     let params = new HttpParams();
     params = params.set('id', id.toString());
-    return this.get<Weather>(this.getForecastUrl, params);
+    return this.get<Forecast>(this.getForecastUrl, params);
   }
 
   getForecastByGeoCoord(coords: Coordinates) {
     let params = new HttpParams();
     params = params.set('lat', coords.latitude.toString());
     params = params.set('lon', coords.longitude.toString());
-    return this.get<Weather>(this.getForecastUrl, params);
+    return this.get<Forecast>(this.getForecastUrl, params);
   }
 
   getLocationsByName(name?: string, country?: string, top?: number) {

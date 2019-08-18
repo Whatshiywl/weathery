@@ -15,21 +15,16 @@ export class ForecastContainer {
     private weathers: WeatherContainer[];
 
     static from(forecast: Forecast) {
-        const newContainer = new ForecastContainer();
-        newContainer.setForecast(forecast);
-        return newContainer;
+        return new ForecastContainer().setForecast(forecast);
     }
 
     constructor() { }
 
     setForecast(forecast: Forecast) {
         const newContainer = new ForecastContainer();
-        newContainer.weathers = [];
-        forecast.list.forEach(weather => {
-            newContainer.weathers.push(WeatherContainer.from(weather));
-        });
+        newContainer.weathers = forecast.list.map(weather => WeatherContainer.from(weather));
         newContainer.forecast = forecast;
-        this.location = `${this.forecast.city.name},${this.forecast.city.country}`;
+        newContainer.location = `${forecast.city.name},${forecast.city.country}`;
         return newContainer;
     }
 
