@@ -28,7 +28,7 @@ $wether-display-width: 100px;
     >.temp-display {
         position: absolute;
         font-size: 7em;
-        line-height: $height;
+        line-height: $height*1.1;
         left: 8%;
     }
 
@@ -73,7 +73,7 @@ $wether-display-width: 100px;
     }
 
     &.small {
-        $ratio: 0.85;
+        $ratio: 0.75;
         height: $height*$ratio;
 
         >.na-display {
@@ -83,11 +83,11 @@ $wether-display-width: 100px;
 
         >.temp-display {
             font-size: 5em;
-            line-height: $height*$ratio;
+            line-height: $height*$ratio*1.2;
         }
 
         >.weather-display {
-            top: 3%;
+            top: -6%;
         }
     }
 }
@@ -114,7 +114,7 @@ $wether-display-width: 100px;
         >.temp-display {
             font-size: 10em;
             line-height: $height;
-            left: 8%;
+            left: 10%;
         }
     
         >.weather-display {
@@ -141,7 +141,7 @@ $wether-display-width: 100px;
     
             >.temp-display {
                 font-size: 6em;
-                line-height: $height*$ratio;
+                line-height: $height*$ratio*1.05;
             }
     
             >.weather-display {
