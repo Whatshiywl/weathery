@@ -1,57 +1,60 @@
+import * as moment from 'moment';
+
 export interface Weather {
-  base: string;
-  clouds: {
-    all: number;
-  };
-  cod: number;
-  coord: {
-    lat: number;
-    lon: number;
-  };
-  dt: number;
-  id: number;
-  main: {
-    humidity: number;
-    pressure: number;
-    temp: number;
-    temp_max: number;
-    temp_min: number;
-  };
-  name: string;
-  sys: {
-    country: string;
+    base: string;
+    clouds: {
+        all: number;
+    };
+    cod: number;
+    coord: {
+        lat: number;
+        lon: number;
+    };
+    dt: number;
     id: number;
-    message: number;
-    sunrise: number;
-    sunset: number;
-    type: number;
-  };
-  timezone: number;
-  visibility: number;
-  weather: {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }[];
-  wind: {
-    deg: number;
-    speed: number;
-  };
-  rain: {
-    '1h': number;
-    '3h': number;
-  };
-  snow: {
-    '1h': number;
-    '3h': number;
-  };
+    main: {
+        humidity: number;
+        pressure: number;
+        temp: number;
+        temp_max: number;
+        temp_min: number;
+    };
+    name: string;
+    sys: {
+        country: string;
+        id: number;
+        message: number;
+        sunrise: number;
+        sunset: number;
+        type: number;
+    };
+    timezone: number;
+    visibility: number;
+    weather: {
+        id: number;
+        main: string;
+        description: string;
+        icon: string;
+    }[];
+    wind: {
+        deg: number;
+        speed: number;
+    };
+    rain: {
+        '1h': number;
+        '3h': number;
+    };
+    snow: {
+        '1h': number;
+        '3h': number;
+    };
 }
 
 export type TempUnit = 'C' | 'F';
 
 export class WeatherContainer {
     private location: string;
+    private when: string;
     private weather: Weather;
     private comfort: number;
     private icon: {
@@ -60,10 +63,19 @@ export class WeatherContainer {
     };
 
     static from(weather: Weather) {
-      return new WeatherContainer().setWeather(weather);
+        return new WeatherContainer().setWeather(weather);
     }
 
-    constructor(private unit: TempUnit = 'C') { }
+    constructor(private unit: TempUnit = 'C') {
+        moment.updateLocale('en', {
+            calendar : {
+                sameDay : '[Today]',
+                nextDay : '[Tomorrow]',
+                nextWeek : 'ddd, D',
+                sameElse : 'L'
+            } as moment.CalendarSpec
+        });
+    }
 
     setWeather(weather: Weather) {
         const newContainer = new WeatherContainer(this.unit);
@@ -111,8 +123,17 @@ export class WeatherContainer {
         return `temp-color-${this.comfort}-light`;
     }
 
+    getMoment() {
+        return moment(this.getWeather().dt*1000);
+    }
+
+    getWhen() {
+        return this.when;
+    }
+
     private update() {
         this.location = `${this.weather.name},${this.weather.sys.country}`;
+        this.when = this.getMoment().calendar();
         this.comfort = this.calcComfort();
         this.icon = {
             src: `https://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`,
@@ -121,10 +142,10 @@ export class WeatherContainer {
     }
 
     private calcComfort() {
-      const mid = 273 + 20;
-      const T = this.weather.main.temp - mid;
-      const p1 = 20;
-      const p2 = 25;
-      return Math.round(100 / (Math.exp(-(T / p1 + Math.exp(T / p2) - 1)) + 1));
+        const mid = 273 + 20;
+        const T = this.weather.main.temp - mid;
+        const p1 = 20;
+        const p2 = 25;
+        return Math.round(100 / (Math.exp(-(T / p1 + Math.exp(T / p2) - 1)) + 1));
     }
 }

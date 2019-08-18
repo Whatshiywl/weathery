@@ -1,5 +1,6 @@
 import { Weather, WeatherContainer } from './WeatherContainer';
 import { City } from '../services/http/http.service';
+import * as moment from 'moment';
 
 export interface Forecast {
     cod: number;
@@ -42,5 +43,15 @@ export class ForecastContainer {
 
     getWeather(index: number) {
         return this.weathers[index];
+    }
+
+    getNextDays() {
+        const today = moment().dayOfYear();
+        return this.weathers.filter(weather => {
+            const weatherWhen = weather.getMoment();
+            const hour = weatherWhen.hour();
+            const day = weatherWhen.dayOfYear();
+            return day !== today && 12 <= hour && hour < 15;
+        });
     }
 }

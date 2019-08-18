@@ -1,6 +1,6 @@
 <div [class]="'daily-weather ' + tempClass">
     <span *ngIf="!container" class="na-display">N/A</span>
-    <h2  *ngIf="container" class="when-display">Today</h2>
+    <h2  *ngIf="container" class="when-display">{{ container.getWhen() }}</h2>
     <div *ngIf="container" class="temp-display">
         <span>
             {{ getWeather().main.temp | convertTemp: getUnit() }}

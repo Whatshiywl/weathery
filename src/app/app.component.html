@@ -2,5 +2,7 @@
   <div class="main-grid">
     <weathery-navbar [title]="title"></weathery-navbar>
     <weathery-daily-weather [container]="currentWeather"></weathery-daily-weather>
+    <weathery-daily-weather *ngFor="let weather of forecast?.getNextDays()"
+    [container]="weather"></weathery-daily-weather>
   </div>
 </div>
