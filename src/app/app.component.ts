@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './services/weather/weather.service';
 import { ForecastService } from './services/forecast/forecast.service';
+import { WeatherContainer } from './models/WeatherContainer';
+import { ForecastContainer } from './models/ForecastContainer';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,9 @@ export class AppComponent implements OnInit {
   title = 'Weathery';
   tempClass: string;
 
+  currentWeather: WeatherContainer;
+  forecast: ForecastContainer;
+
   constructor(
     private weatherService: WeatherService,
     private forecastService: ForecastService
@@ -19,12 +24,13 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.weatherService.onWeather$()
     .subscribe(container => {
+      this.currentWeather = container;
       this.tempClass = container.getTempClass();
     });
 
     this.forecastService.onForecast$()
-    .subscribe(forecast => {
-      console.log(forecast);
+    .subscribe(forecastContainer => {
+      this.forecast = forecastContainer;
     });
   }
 

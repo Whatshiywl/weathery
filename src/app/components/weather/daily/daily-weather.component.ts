@@ -1,23 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { WeatherContainer } from 'src/app/models/WeatherContainer';
-import { WeatherService } from 'src/app/services/weather/weather.service';
 
 @Component({
   selector: 'weathery-daily-weather',
   templateUrl: './daily-weather.component.html',
   styleUrls: ['./daily-weather.component.scss']
 })
-export class DailyWeatherComponent implements OnInit {
-  container: WeatherContainer;
+export class DailyWeatherComponent implements OnInit, OnChanges {
+  @Input() container: WeatherContainer;
   tempClass: string;
 
   precArray: number[];
   private precIcons = 5;
   private maxPrec = 10;
 
-  constructor(
-    private weatherService: WeatherService
-  ) {
+  constructor( ) {
     this.tempClass = 'temp-color-50-light';
   }
 
@@ -26,12 +23,13 @@ export class DailyWeatherComponent implements OnInit {
     for (let rain = 0; rain < this.precIcons; rain++) {
       this.precArray.push(this.maxPrec * rain / this.precIcons);
     }
+  }
 
-    this.weatherService.onWeather$()
-    .subscribe(container => {
-      this.container = container;
-      this.tempClass = container.getTempClassLight();
-    });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.container && changes.container.currentValue) {
+      this.container = changes.container.currentValue as WeatherContainer;
+      this.tempClass = this.container.getTempClassLight();
+    }
   }
 
   getWeather() {
