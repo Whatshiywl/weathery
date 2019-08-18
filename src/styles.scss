@@ -17,12 +17,12 @@ body {
     }
 
     .temp-color-#{$i}-dark {
-        background-color: darken($base, 10%);
+        background-color: scale-color($base, $lightness: -15%);
         color: $base;
     }
 
     .temp-color-#{$i}-light {
-        background-color: lighten($base, 10%);
+        background-color: scale-color($base, $lightness: 15%);
         color: $base;
     }
 }

@@ -12,7 +12,7 @@ export class DailyWeatherComponent implements OnInit, OnChanges {
 
   precArray: number[];
   private precIcons = 5;
-  private maxPrec = 10;
+  private maxPrec = 5;
 
   constructor( ) {
     this.tempClass = 'temp-color-50-light';
@@ -44,11 +44,27 @@ export class DailyWeatherComponent implements OnInit, OnChanges {
     return this.container.getUnit();
   }
 
+  isPrecipitating() {
+    const weather = this.container.getWeather();
+    const isRaining = weather && weather.rain;
+    const isSnowing = weather && weather.snow;
+    const currentPrec = isSnowing ? 
+    (weather.snow['3h'] || weather.snow['1h']*3) : 
+    (isRaining ? 
+      (weather.rain['3h'] || weather.rain['1h']*3) : 
+      0);
+    return currentPrec > 0;
+  }
+
   getPrecClass(prec: number) {
     const weather = this.container.getWeather();
     const isRaining = weather && weather.rain;
     const isSnowing = weather && weather.snow;
-    const currentPrec = isSnowing ? weather.snow['3h'] : (isRaining ? weather.rain['3h'] : 0);
+    const currentPrec = isSnowing ? 
+    (weather.snow['3h'] || weather.snow['1h']*3) : 
+    (isRaining ? 
+      (weather.rain['3h'] || weather.rain['1h']*3) : 
+      0);
     return {
       'wi-raindrop': !isSnowing,
       'wi-snowflake-cold': isSnowing,
