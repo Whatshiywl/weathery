@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { ForecastContainer, Forecast } from 'src/app/models/ForecastContainer';
 import { GeolocationService } from '../geolocation/geolocation.service';
 import { first } from 'rxjs/operators';
+import { TempUnit } from 'src/app/models/WeatherContainer';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class ForecastService {
 
   private readonly weatherSubject: Subject<ForecastContainer>;
   private readonly errorSubject: Subject<any>;
+
+  private forecastContainer: ForecastContainer;
 
   constructor(
     private httpService: HttpService,
@@ -31,21 +34,26 @@ export class ForecastService {
 
   requestForecastByID(id: number) {
     this.httpService.getForecastById(id)
-    .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
+    .subscribe(this.emitForecast.bind(this), this.emitError.bind(this));
   }
 
   requestForecastByBeoCoords() {
     this.geolocationService.onGeolocation$().pipe(first())
     .subscribe(coords => {
       this.httpService.getForecastByGeoCoord(coords)
-      .subscribe(this.emitWeather.bind(this), this.emitError.bind(this));
+      .subscribe(this.emitForecast.bind(this), this.emitError.bind(this));
     });
     this.geolocationService.requestCurrentPosition();
   }
 
-  private emitWeather(forecast: Forecast) {
-    const forecastContainer = ForecastContainer.from(forecast);
-    this.weatherSubject.next(forecastContainer);
+  setTempUnit(unit: TempUnit) {
+    this.forecastContainer = this.forecastContainer.setUnit(unit);
+    this.weatherSubject.next(this.forecastContainer);
+  }
+
+  private emitForecast(forecast: Forecast) {
+    this.forecastContainer = ForecastContainer.from(forecast);
+    this.weatherSubject.next(this.forecastContainer);
   }
 
   private emitError(error: any) {

@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   tempClass: string;
 
   currentWeather: WeatherContainer;
-  forecast: ForecastContainer;
+  forecastWeathers: WeatherContainer[];
 
   constructor(
     private weatherService: WeatherService,
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
 
     this.forecastService.onForecast$()
     .subscribe(forecastContainer => {
-      this.forecast = forecastContainer;
+      this.forecastWeathers = forecastContainer.getNextDays();
     });
   }
 

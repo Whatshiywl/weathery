@@ -1,4 +1,4 @@
-import { Weather, WeatherContainer } from './WeatherContainer';
+import { Weather, WeatherContainer, TempUnit } from './WeatherContainer';
 import { City } from '../services/http/http.service';
 import * as moment from 'moment';
 
@@ -53,5 +53,11 @@ export class ForecastContainer {
             const day = weatherWhen.dayOfYear();
             return day !== today && 12 <= hour && hour < 15;
         });
+    }
+
+    setUnit(unit: TempUnit) {
+        const newContainer = ForecastContainer.from(this.forecast);
+        newContainer.weathers = newContainer.weathers.map(weather => weather.setUnit(unit));
+        return newContainer;
     }
 }

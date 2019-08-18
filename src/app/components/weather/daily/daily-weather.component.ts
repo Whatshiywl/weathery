@@ -8,6 +8,7 @@ import { WeatherContainer } from 'src/app/models/WeatherContainer';
 })
 export class DailyWeatherComponent implements OnInit, OnChanges {
   @Input() container: WeatherContainer;
+  @Input() small: boolean;
   tempClass: string;
 
   precArray: number[];

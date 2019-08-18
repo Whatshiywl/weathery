@@ -71,6 +71,25 @@ $wether-display-width: 100px;
             }
         }
     }
+
+    &.small {
+        $ratio: 0.85;
+        height: $height*$ratio;
+
+        >.na-display {
+            font-size: 8em;
+            line-height: $height*$ratio;
+        }
+
+        >.temp-display {
+            font-size: 5em;
+            line-height: $height*$ratio;
+        }
+
+        >.weather-display {
+            top: 3%;
+        }
+    }
 }
 
 
@@ -108,6 +127,25 @@ $wether-display-width: 100px;
 
             >.rain-display {
                 margin-top: 15px;
+            }
+        }
+
+        &.small {
+            $ratio: 0.7;
+            height: $height*$ratio;
+    
+            >.na-display {
+                font-size: 10em;
+                line-height: $height*$ratio;
+            }
+    
+            >.temp-display {
+                font-size: 6em;
+                line-height: $height*$ratio;
+            }
+    
+            >.weather-display {
+                top: 10%;
             }
         }
     }

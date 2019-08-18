@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WeatherService } from '../../services/weather/weather.service';
 import { TempUnit } from '../../models/WeatherContainer';
 import { StorageService } from 'src/app/services/storage/storage.service';
+import { ForecastService } from 'src/app/services/forecast/forecast.service';
 
 @Component({
   selector: 'weathery-navbar',
@@ -19,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private weatherService: WeatherService,
+    private forecastService: ForecastService
   ) {
     this.tempClass = 'temp-color-50-dark';
     this.switchBackClass = 'temp-color-50';
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit {
 
   onTempUnitToggle(unit: TempUnit) {
     this.weatherService.setTempUnit(unit);
+    this.forecastService.setTempUnit(unit);
   }
 
 }
