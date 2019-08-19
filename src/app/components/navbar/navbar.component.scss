@@ -16,7 +16,7 @@
         height: 1.5em;
 
         &.title-wrapper {
-            justify-self: left;
+            justify-self: right;
             margin: 0.5em 0 0 1vw;
 
             >.title {
@@ -33,7 +33,7 @@
 
         &.switch {
             grid-column: 3;
-            justify-self: right;
+            justify-self: left;
             margin-right: 1vw;
         }
     }
@@ -44,9 +44,12 @@
     .navbar-wrapper >.navbar-item {
         height: 2em;
 
-        &.title-wrapper > .title {
-            font-size: 1.5em;
-        }
+        &.title-wrapper {
+
+            >.title {
+                font-size: 1.5em;
+            }
+        } 
     
         .location {
             font-size: 1.2em;
@@ -56,12 +59,15 @@
 
 @media screen and (min-width: $break-medium) {
 
-    .navbar-wrapper >.navbar-item {
+    .navbar-wrapper > .navbar-item {
         height: 2.5em;
 
-        &.title-wrapper > .title {
-            font-size: 2em;
-        }
+        &.title-wrapper {
+
+            >.title {
+                font-size: 2em;
+            }
+        } 
     
         .location {
             font-size: 1.5em;
@@ -75,11 +81,19 @@
         grid-template-columns: auto 1fr auto;
     
         >.navbar-item {
+
+            &.title-wrapper {
+                justify-self: left;
+            }
         
             &.search-bar {
                 grid-row: 1;
                 grid-column: 2;
                 margin-top: 0.5em;
+            }
+
+            &.switch {
+                justify-self: right;
             }
         }
     }
