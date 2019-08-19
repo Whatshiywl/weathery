@@ -1,0 +1,42 @@
+.footer-wrapper {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 10% 40% 40% 10%;
+    grid-gap: 10px;
+    color: black;
+
+    >.personal-info {
+        grid-column: 2;
+
+        >p {
+            margin: 0.5em 0 0 0;
+        }
+    }
+
+    >.links {
+        grid-column: 3;
+
+        .question-link {
+            color: black;
+        }
+
+        >p {
+            margin: 0.5em 0 0 0;
+        }
+    }
+
+    >.copyright {
+        grid-row: 2;
+        grid-column: 1 / 5;
+
+        >p {
+            text-align: center;
+            margin-top: 0;
+            font-size: 0.8em;
+        }
+    }
+
+    [class*='fa'] {
+        margin-right: 5px; 
+    }
+}

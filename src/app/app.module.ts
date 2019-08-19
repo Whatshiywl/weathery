@@ -10,6 +10,7 @@ import { SwitchComponent } from './components/switch/switch.component';
 import { DailyWeatherComponent } from './components/weather/daily/daily-weather.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     SwitchComponent,
     DailyWeatherComponent,
     NavbarComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

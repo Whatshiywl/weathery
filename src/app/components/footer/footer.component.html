@@ -1,0 +1,32 @@
+<div [class]="'footer-wrapper ' + tempClass">
+    <div class="personal-info">
+        <p>
+            Who made this?<br/>
+            <i class="fas fa-user-circle"></i>Alexandre Bueno Bacellar<br/>
+            <br/>
+            Where can I find him?<br/>
+            <i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/alexandre-bacellar/">in/alexandre-bacellar/</a><br/>
+            <br/>
+            How can I talk to him?<br/>
+            <i class="fas fa-envelope"></i><a href="mailto:alexandre.bacellar@hotmail.com">alexandre.bacellar@hotmail.com</a><br/>
+        </p>
+    </div>
+    <div class="links">
+        <p>
+            Where can I find this project?<br/>
+            <i class="fab fa-github"></i><a href="https://https://github.com/Whatshiywl/weathery">Github</a><br/>
+            <br/>
+            What else is he up to?<br/>
+            <a *ngFor="let i of questions" href="https://blank-prototype.herokuapp.com/" class="question-link"><i class="fas fa-question-circle"></i></a><br/>
+            <br/>
+            Who helped in this project?<br/>
+            <i class="fas fa-user-circle"></i><a href="https://www.linkedin.com/in/julia-bacellar-37903212b/">Julia</a> made the website icon<br/>
+            <i class="fas fa-bug"></i>A bunch of family and friends helped test and track down bugs<br/>
+        </p>
+    </div>
+    <div class="copyright">
+        <p>
+            Copyright © {{ getYear() }} Alexandre Bueno Bacellar. All rights reserved.
+        </p>
+    </div>
+</div>
