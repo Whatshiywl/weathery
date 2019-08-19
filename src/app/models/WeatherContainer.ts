@@ -61,6 +61,28 @@ export class WeatherContainer {
         src: string,
         alt: string
     };
+    
+    private static weatherCondidionMap = {
+        clear: {
+            d: "Sunny",
+            n: "Cleary"
+        },
+        rain: "Rainy",
+        clouds: "Cloudy",
+        snow: "Snowy",
+        mist: "Misty",
+        smoke: "Smoky",
+        haze: "Hazy",
+        dist: "Dusty",
+        fog: "Foggy",
+        sand: "Sandy",
+        ash: "Ashy",
+        squall: "Squally",
+        tornado: "\"Tornadoy\"",
+        thunderstorm: "Stormy",
+        drizzle: "Drizzly",
+
+    };
 
     static from(weather: Weather) {
         return new WeatherContainer().setWeather(weather);
@@ -132,12 +154,19 @@ export class WeatherContainer {
     }
 
     private update() {
+        const weatherInfo = this.weather.weather[0];
+        const weatherCondition = weatherInfo.main.toLowerCase();
+        let mappedCondition = WeatherContainer.weatherCondidionMap[weatherCondition];
+        if (typeof mappedCondition === 'object') {
+            const dayMoment = weatherInfo.icon[weatherInfo.icon.length - 1];
+            mappedCondition = mappedCondition[dayMoment];
+        }
         this.location = `${this.weather.name},${this.weather.sys.country}`;
         this.when = this.getMoment().calendar();
         this.comfort = this.calcComfort();
         this.icon = {
-            src: `https://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`,
-            alt: this.weather.weather[0].main
+            src: `https://openweathermap.org/img/wn/${weatherInfo.icon}@2x.png`,
+            alt: mappedCondition || (weatherInfo.main = 'y')
         };
     }
 
