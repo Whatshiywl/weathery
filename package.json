@@ -31,7 +31,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "adm-zip": "^0.4.13",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "http-proxy-middleware": "^0.19.1",
     "moment": "^2.24.0",
     "rxjs": "~6.4.0",
